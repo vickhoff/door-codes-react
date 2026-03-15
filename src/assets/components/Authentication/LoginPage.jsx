@@ -11,7 +11,7 @@ export function LoginPage() {
     async function handleLoginForm(loginData) {
         const userData = Object.fromEntries(loginData);
         try {
-            await loginUser(userData)
+            const data = await loginUser(userData)
         } catch(error) {
             setError(error.message)
         }
