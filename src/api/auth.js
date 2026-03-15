@@ -7,6 +7,7 @@ export async function loginUser(userData) {
             Accept: "application/json",
             'Content-Type': "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(userData),
         })
 
