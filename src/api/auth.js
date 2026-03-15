@@ -15,7 +15,7 @@ export async function loginUser(userData) {
             const error = await response.json()
             throw new Error(error.message)
         }
-
+        console.log(document.cookie)
         console.log("You logged in!")
         return response.json()
 }
