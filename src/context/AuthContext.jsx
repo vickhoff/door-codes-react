@@ -7,12 +7,12 @@ export function AuthProvider({children}) {
     const[user, setUser] = useState(null)
     const[loading, setLoading] = useState(true)
 
-    function login(user) {
+    function setUserData(user) {
         setUser(user)
     }
 
     async function logout() {
-        await fetch("https://door-codes-seven.vercel.app/auth/logout", {
+        await fetch("/api/auth/logout", {
             method: "POST",
             credentials: "include"
         })
@@ -21,17 +21,17 @@ export function AuthProvider({children}) {
     
     useEffect(() => {
         async function fetchUser() {
-            const response = await fetch("https://door-codes-seven.vercel.app/user/me", {
+            const response = await fetch("/api/user/me", {
                 credentials: "include"
             })
-            const data = response.json()
+            const data = await response.json()
             setUser(data)
         }
         fetchUser()
       },[]);
 
       return (
-        <AuthContext.Provider value={{user, login, logout}}>
+        <AuthContext.Provider value={{user, loading, setUserData, logout}}>
             {children}
         </AuthContext.Provider>
     )
