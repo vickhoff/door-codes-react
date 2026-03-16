@@ -2,16 +2,29 @@ import { TextField } from "../shared/Input/TextField"
 import { Button } from "../shared/Button/Button"
 import { Link } from "react-router-dom"
 import { loginUser } from "../../../api/auth"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../../context/AuthContext"
+
 
 export function LoginPage() {
 
+    const navigate = useNavigate();
+    
+    const {setUserData} = useAuth()
+    
+    const {user} = useAuth()
+    
     const [error, setError] = useState(null)
 
     async function handleLoginForm(loginData) {
-        const userData = Object.fromEntries(loginData);
+        console.log("Form submitted")
+        const formData = Object.fromEntries(loginData);
         try {
-            const data = await loginUser(userData)
+            const data = await loginUser(formData)
+            console.log("data:", data)
+            setUserData(data)
+            navigate("/me")
         } catch(error) {
             setError(error.message)
         }
@@ -24,7 +37,7 @@ export function LoginPage() {
             <h1>Login</h1>
             <form action={handleLoginForm}>
                 <div>
-                    <TextField required label="Email" id="input-email" placeholder="Enter your email" name="email"/>
+                    <TextField required type="email" label="Email" id="input-email" placeholder="Enter your email" name="email"/>
                 </div>
 
                 <div>
