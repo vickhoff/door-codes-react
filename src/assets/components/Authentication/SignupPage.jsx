@@ -1,5 +1,5 @@
 import { TextField } from "../shared/Input/TextField"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import styles from "./Authentication.module.css"
 import { registerUser } from "../../../api/auth"
 import { Button } from "../shared/Button/Button"
@@ -12,6 +12,7 @@ export function SignupPage() {
         email: null,
         password: null
     })
+    const inputRef = useRef()
 
     async function handleSignupForm(signupData) {
         const newUserData = Object.fromEntries(signupData);
@@ -33,15 +34,15 @@ export function SignupPage() {
             <h1>Signup</h1>
             <form action={handleSignupForm}>
                 <div>
-                    <TextField required label="Name" id="input-name" placeholder="Enter your name" name="username" errorText={errors.name}/>
+                    <TextField autoFocus ref={inputRef} required label={"Name"} id={"input-name"} placeholder={"Enter your name"} name={"username"} errorText={errors.name}/>
                 </div>
 
                 <div>
-                    <TextField required type="email" defaultValue="@gmail.com" autocomplete="new-email" label="Email" id="input-email" placeholder="Enter your email" name="email" errorText={errors.email} />
+                    <TextField ref={inputRef} required type={"email"} defaultValue={"@gmail.com"} autocomplete={"new-email"} label={"Email"} id={"input-email"} placeholder={"Enter your email"} name={"email"} errorText={errors.email} />
                 </div>
 
                 <div>
-                    <TextField required type="password" defaultValue="password" autocomplete="new-password" label="Password" id="input-password" placeholder="Choose a password" name="password" />
+                    <TextField ref={inputRef} required type={"password"} defaultValue={"password"} autocomplete={"new-password"} label={"Password"} id={"input-password"} placeholder={"Choose a password"} name={"password"} />
                 </div>
                 <Button text="Signup" />
             </form>
