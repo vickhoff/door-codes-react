@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { loginUser, registerUser } from "../api/auth";
 
 const AuthContext = createContext(null)
 
@@ -21,12 +20,16 @@ export function AuthProvider({children}) {
     
     useEffect(() => {
         async function fetchUser() {
+            console.log("fetching user")
             const response = await fetch("/api/user/me", {
                 credentials: "include"
             })
             const data = await response.json()
+            
+            console.log("session restore:", response.status)
             setUser(data)
         }
+        setLoading(false)
         fetchUser()
       },[]);
 

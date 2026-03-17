@@ -18,12 +18,15 @@ export function LoginPage() {
     const [error, setError] = useState(null)
 
     async function handleLoginForm(loginData) {
-        console.log("Form submitted")
         const formData = Object.fromEntries(loginData);
         try {
             const data = await loginUser(formData)
-            console.log("data:", data)
-            setUserData(data)
+            const userResponse = await fetch("/api/user/me", {
+                credentials: "include"
+            })
+            const userData = await userResponse.json()
+            console.log(userData)
+            setUserData(userData)
             navigate("/me")
         } catch(error) {
             setError(error.message)
