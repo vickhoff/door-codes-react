@@ -34,15 +34,15 @@ export function SignupPage() {
             <h1>Signup</h1>
             <form action={handleSignupForm}>
                 <div>
-                    <TextField autoFocus ref={inputRef} required label={"Name"} id={"input-name"} placeholder={"Enter your name"} name={"username"} errorText={errors.name}/>
+                    <TextField autoFocus ref={inputRef} required label={"Name"} id={"input-name"} placeholder={"Enter your name"} name={"username"} error={errors.name}/>
                 </div>
 
                 <div>
-                    <TextField ref={inputRef} required type={"email"} defaultValue={"@gmail.com"} autocomplete={"new-email"} label={"Email"} id={"input-email"} placeholder={"Enter your email"} name={"email"} errorText={errors.email} />
+                    <TextField ref={inputRef} required type={"email"} defaultValue={"@gmail.com"} autoComplete={"new-email"} label={"Email"} id={"input-email"} placeholder={"Enter your email"} name={"email"} error={errors.email} />
                 </div>
 
                 <div>
-                    <TextField ref={inputRef} required type={"password"} defaultValue={"password"} autocomplete={"new-password"} label={"Password"} id={"input-password"} placeholder={"Choose a password"} name={"password"} />
+                    <TextField ref={inputRef} required type={"password"} defaultValue={"password"} autoComplete={"new-password"} label={"Password"} id={"input-password"} placeholder={"Choose a password"} name={"password"} />
                 </div>
                 <Button text="Signup" />
             </form>

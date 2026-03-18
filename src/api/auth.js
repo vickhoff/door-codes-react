@@ -35,6 +35,4 @@ export async function registerUser(userData) {
 
                 console.log("You signed up!")
                 return response.json()
-
-                loginUser(userData)
 }

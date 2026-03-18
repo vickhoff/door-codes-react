@@ -14,7 +14,6 @@ export function LoginPage() {
     const {user} = useAuth()
     const [error, setError] = useState(null)
     const inputRef = useRef()
-    const emailRef = useRef()
 
     async function handleLoginForm(loginData) {
         const formData = Object.fromEntries(loginData);
@@ -43,7 +42,7 @@ export function LoginPage() {
                 </div>
 
                 <div>
-                    <TextField ref={inputRef} required type={"password"} autocomplete={"password"} label={"Password"} id={"input-password"} placeholder={"Enter your password"} name={"password"}/>
+                    <TextField ref={inputRef} required type={"password"} autoComplete={"password"} label={"Password"} id={"input-password"} placeholder={"Enter your password"} name={"password"}/>
                 </div>
                 <Button text="Login" />
             </form>
