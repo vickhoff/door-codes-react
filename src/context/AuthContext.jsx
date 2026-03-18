@@ -15,23 +15,23 @@ export function AuthProvider({children}) {
             method: "POST",
             credentials: "include"
         })
+        console.log("logging out")
         setUser(null)
     }
     
     useEffect(() => {
-        async function fetchUser() {
-            console.log("fetching user")
+        async function fetchUser() {                               
             const response = await fetch("/api/user/me", {
-                credentials: "include"
-            })
-            const data = await response.json()
-            
-            console.log("session restore:", response.status)
-            setUser(data)
-        }
-        setLoading(false)
+        credentials: "include" })                                  
+            if (response.ok) {
+                const data = await response.json()                 
+                setUser(data)
+            }                                                      
+            setLoading(false)  // move here
+        } 
         fetchUser()
       },[]);
+
 
       return (
         <AuthContext.Provider value={{user, loading, setUserData, logout}}>
