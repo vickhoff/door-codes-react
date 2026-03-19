@@ -4,7 +4,8 @@ import { SignupPage } from "./assets/components/Authentication/SignupPage"
 import { AuthLayout } from "./assets/components/Authentication/AuthLayout"
 import { LandingPage } from "./assets/components/LandingPage/LandingPage"
 import { AuthProvider } from "./context/AuthContext"
-import { ProfilePage } from "./assets/components/ProfilePage/ProfilePage"
+import {ProfilePage} from "./assets/components/ProfilePage/ProfilePage"
+import AuthenticationPage from "./assets/components/Authentication/AuthenticationPage"
 
 function App() {
   return (
@@ -12,11 +13,12 @@ function App() {
         <AuthProvider>
       <Routes>
         <Route index element={<LandingPage />} />
-          <Route element={<AuthLayout/>}>
-            <Route path="signup" element={<SignupPage />} />
-            <Route path="login" element={<LoginPage />} />
-          </Route>
-          <Route path="me" element={<ProfilePage />} />
+        <Route path="login2" element={<AuthenticationPage authType={"login"} />} />
+        <Route element={<AuthLayout/>}>
+          <Route path="signup" element={<SignupPage />} />
+          <Route path="login" element={<LoginPage />} />
+        </Route>
+        <Route path="me" element={<ProfilePage />} />
         
 
       </Routes>
