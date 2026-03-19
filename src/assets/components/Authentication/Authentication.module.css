@@ -11,3 +11,50 @@
         gap: 24px;
     }
 }
+
+.authContainer {                          
+    display: flex;                        
+    height: calc(100vh - var(--body-padding) * 2);                 
+    width: 100%;    
+    gap: 24px;                            
+}    
+
+.formContainer,
+.heroContainer {
+    height: 100%;
+    width: 50%;
+    display: flex;
+}
+
+.heroContainer {
+    border-radius: 48px;
+    justify-content: space-between;
+    flex-direction: column;
+    color: white;
+    padding: 72px;
+}
+
+.heroContainer.login {
+    background-image: url("../../images/login-hero.png");
+    background-size: cover;
+    background-repeat: none;
+}
+
+.heroContainer.signup {
+    
+}
+
+.formContainer {
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    height: 54px;
+    align-self: flex-start;
+}
+
+.heading2 {
+    font-size: 4rem;
+    margin-block-end: 24px;
+}

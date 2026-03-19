@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--type-sans);
   line-height: 1.5;
   font-weight: 400;
 
@@ -14,6 +14,33 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Color tokens */
+  --color-surface-default: light-dark(white, #101010);
+  --color-surface-shy: light-dark(rgb(247, 247, 247), rgb(39 39 39));
+  --color-surface-inverted: light-dark(#111111, #eae8e3);
+  --color-surface-accent: light-dark(#D1C4F0, #453F73);
+  --color-surface-accent-bold: light-dark(#3c2a63, #09071d);
+  --color-surface-alert: light-dark(#e61111, #dc3939);
+  --color-surface-raised: light-dark(#eae8e3, #101010);
+
+  --color-foreground-default: light-dark(#333, #EAE8E3);
+  --color-foreground-subtle: light-dark(#B0B0B0, #5a5a5a);
+  --color-foreground-inverted: light-dark(#eae8e3, #101010);
+  --color-foreground-subtle-inverted: light-dark(#B0B0B0, #a09e99);
+
+  --color-border: light-dark(#CFCFCF, #3a3a3a);
+  --color-border-bold: light-dark(var(--color-surface-inverted), #3a3a3a);
+
+  --color-border-accent: light-dark(rgba(29, 22, 86, 0.38), rgb(137 132 179 / 38%));
+
+  --color-link: light-dark(#4550E9, #4550E9);
+
+  /* Typography variables */
+
+  --type-sans: "Instrument Sans", sans-serif;
+  --type-serif: "Instrument Serif", serif;
+
 }
 
 a {
@@ -30,10 +57,47 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  padding: var(--body-padding)
+  padding: var(--body-padding);
+  box-sizing: border-box;  
+}
+
+h1,
+h2, 
+h3, 
+h4, 
+h5 {
+  font-family: var(--type-serif);
+  font-weight: 400;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 3.2rem;
   line-height: 1.1;
+}
+h2 {
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
 }

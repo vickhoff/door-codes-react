@@ -2,7 +2,9 @@ export async function getMe() {
     const response = await fetch("/api/items", {
         credentials: "include"
     })
+
+    if (!response.ok) throw new Error(error.message || "Something went wrong")
     const data = await response.json()
 
-    console.log(data)
+    return data
 }
