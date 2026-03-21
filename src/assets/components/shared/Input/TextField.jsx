@@ -10,7 +10,7 @@ export function TextField({label, error, id, required, ...rest}) {
                 <label htmlFor={id}>{label}{required && <span className={styles.required}> *</span>}</label>
             }
             <input className={styles.input} {...rest} />
-            {error && <span className={styles.helper}>{error}</span>}
+            {error && <span className="error-message">{error}</span>}
         </div>
     )
 

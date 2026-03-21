@@ -34,10 +34,11 @@
     padding: 72px;
 }
 
-.heroContainer.login {
+.heroContainer.login,
+.heroContainer.signup {
     background-image: url("../../images/login-hero.png");
     background-size: cover;
-    background-repeat: none;
+    background-repeat: no-repeat;
 }
 
 .heroContainer.signup {
@@ -45,8 +46,22 @@
 }
 
 .formContainer {
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 72px;
+    align-items: center;
+}
+
+.formContainer form {
+    max-width: 320px;
+}
+
+.formContainer header {     
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .logo {
@@ -57,4 +72,8 @@
 .heading2 {
     font-size: 4rem;
     margin-block-end: 24px;
+}
+
+.heroMessage {
+    width:80%;
 }

@@ -27,7 +27,6 @@ export async function registerUser(userData) {
                 },
                 body: JSON.stringify(userData),
                 })
-
                 if (!response.ok) {
                     const error = await response.json()
                     throw new Error(error.message || "Something went wrong")

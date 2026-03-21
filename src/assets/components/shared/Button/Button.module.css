@@ -10,10 +10,11 @@
   }
 
   .primary {
-    background-color: var(--color-surface-inverted);
+    background-color: var(--color-surface-accent);
     color: var(--color-foreground-inverted);
+    transition: 0.2s ease-in-out all;
      &:hover {
-        color: var(--color-foreground-inverted);
+        background-color: var(--color-surface-accent-hover);
      }
   }
 
@@ -24,11 +25,6 @@
     &:hover {
         color: var(--color-foreground-default);
      }
-  }
-
-  button:hover,
-  a:hover {
-    color: inherit;
   }
 
   button:focus,
