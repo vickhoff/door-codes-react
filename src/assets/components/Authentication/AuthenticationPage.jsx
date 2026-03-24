@@ -1,5 +1,6 @@
 import styles from "./Authentication.module.css"
-import logo from "../../images/logo.svg"
+import logoWhite from "../../images/logo-white.svg"
+import logoBlack from "../../images/logo-black.svg"
 import Form from "../shared/Form/Form"
 import { TextField } from "../shared/Input/TextField"
 import { useNavigate } from "react-router-dom"
@@ -12,20 +13,15 @@ import { Link } from "react-router-dom"
 export default function AuthenticationPage({authType}) {
 
     const navigate = useNavigate();
-    const {setUserData} = useAuth()
+    const {setUserData, refreshUser} = useAuth()
     const {user} = useAuth()
     const [error, setError] = useState({})
 
     async function handleLoginForm(loginData) {
         const formData = Object.fromEntries(loginData);
         try {
-            const data = await loginUser(formData)
-            const userResponse = await fetch("/api/user/me", {
-                credentials: "include"
-            })
-            const userData = await userResponse.json()
-            console.log(userData)
-            setUserData(userData)
+            await loginUser(formData)
+            await refreshUser()
             navigate("/me")
         } catch(error) {
             setError({general: error.message})
@@ -36,14 +32,8 @@ export default function AuthenticationPage({authType}) {
         const newUserData = Object.fromEntries(signupData);
         try {
             await registerUser(newUserData)
-            const userResponse = await fetch("/api/user/me", {
-                credentials: "include"
-            })
-            const userData = await userResponse.json()
-            setUserData(userData)
+            await refreshUser()
             navigate("/me")
-            console.log(error)
-            
         } catch (error) {
             if (error.message.toLowerCase().includes("name")) {
                 setError(prev => ({ ...prev, name: "Name already exists" }))
@@ -112,8 +102,10 @@ export default function AuthenticationPage({authType}) {
 
     return (
         <main className={styles.authContainer}>
+            <Link to="/" className={styles.logoCentered}><img className={`${styles.logo} ${styles.logoMobile}`} src={logoBlack} alt="GetIn logo" /></Link>
             <section className={`${styles.heroContainer} ${heroClassName}`}>
-                <Link to="/"><img className={styles.logo} src={logo} alt="GetIn logo" /></Link>
+                <Link to="/"><img className={styles.logo} src={logoWhite} alt="GetIn logo" /></Link>
+                
                 <div className={styles.heroMessage}>
                     <h2 className={styles.heading2}>{heroMessage.title}</h2>
                     <p>{heroMessage.message}</p>

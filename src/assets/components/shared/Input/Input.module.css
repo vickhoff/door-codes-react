@@ -8,6 +8,7 @@
     padding-block: 8px;
     border: 1px solid var(--color-border);
     border-radius: 8px;
+    margin-block-end: 21px;
 }
 
 .required {
@@ -21,4 +22,9 @@
 .errorMessage {
     color: var(--color-foreground-error);
     font-size: 0.875rem;
+    margin-block-end: 0;
+}
+
+.inputError {
+    margin-block-end: 0;
 }
