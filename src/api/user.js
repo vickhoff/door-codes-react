@@ -3,7 +3,10 @@ export async function getMe() {
         credentials: "include"
     })
 
-    if (!response.ok) throw new Error(error.message || "Something went wrong")
+    if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.message || "Something went wrong")
+    }
     const data = await response.json()
 
     return data

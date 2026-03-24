@@ -19,8 +19,8 @@ export function SignupPage() {
         try {
             await registerUser(newUserData)
         } catch (error) {
-            if (error.message.toLowerCase().includes("username")) {
-                setErrors(prev => ({ ...prev, name: "Username already exists" }))
+            if (error.message.toLowerCase().includes("name")) {
+                setErrors(prev => ({ ...prev, name: "Name already exists" }))
             } else if (error.message.toLowerCase().includes("email")) {
                 setErrors(prev => ({ ...prev, email: "Email already exists"}))
             } else {
@@ -34,7 +34,7 @@ export function SignupPage() {
             <h1>Signup</h1>
             <form action={handleSignupForm}>
                 <div>
-                    <TextField autoFocus ref={inputRef} required label={"Name"} id={"input-name"} placeholder={"Enter your name"} name={"username"} error={errors.name}/>
+                    <TextField autoFocus ref={inputRef} required label={"Name"} id={"input-name"} placeholder={"Enter your name"} name={"name"} error={errors.name}/>
                 </div>
 
                 <div>

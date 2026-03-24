@@ -25,9 +25,9 @@ export async function registerUser(userData) {
                     Accept: "application/json",
                     'Content-Type': "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify(userData),
                 })
-
                 if (!response.ok) {
                     const error = await response.json()
                     throw new Error(error.message || "Something went wrong")

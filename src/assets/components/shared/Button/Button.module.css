@@ -1,19 +1,25 @@
 .button,
 .link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 8px;
     border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
+    padding-inline: 24px;
+    padding-block: 8px;
+    font-size: 1rem;
+    min-height: 40px;
     font-weight: 500;
     font-family: inherit;
     cursor: pointer;
   }
 
   .primary {
-    background-color: var(--color-surface-inverted);
+    background-color: var(--color-surface-accent);
     color: var(--color-foreground-inverted);
+    transition: 0.2s ease-in-out all;
      &:hover {
-        color: var(--color-foreground-inverted);
+        background-color: var(--color-surface-accent-hover);
      }
   }
 
@@ -26,9 +32,8 @@
      }
   }
 
-  button:hover,
-  a:hover {
-    color: inherit;
+  a.buttonLink {
+    text-decoration: none;
   }
 
   button:focus,
