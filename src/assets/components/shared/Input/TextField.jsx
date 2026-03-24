@@ -9,8 +9,8 @@ export function TextField({label, error, id, required, ...rest}) {
             {label && 
                 <label htmlFor={id}>{label}{required && <span className={styles.required}> *</span>}</label>
             }
-            <input className={styles.input} {...rest} />
-            {error && <span className="error-message">{error}</span>}
+            <input className={`${styles.input} ${error && styles.inputError}`} id={id} required={required} {...rest} />
+            {error && <span className={styles.errorMessage}>{error}</span>}
         </div>
     )
 

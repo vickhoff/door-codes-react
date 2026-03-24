@@ -11,5 +11,14 @@
 }
 
 .required {
-    color: red;
+    color: var(--color-foreground-error);
+}
+
+.inputError {
+    border: 1px solid var(--color-foreground-error);
+}
+
+.errorMessage {
+    color: var(--color-foreground-error);
+    font-size: 0.875rem;
 }

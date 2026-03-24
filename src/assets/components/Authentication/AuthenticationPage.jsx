@@ -42,6 +42,7 @@ export default function AuthenticationPage({authType}) {
             const userData = await userResponse.json()
             setUserData(userData)
             navigate("/me")
+            console.log(error)
             
         } catch (error) {
             if (error.message.toLowerCase().includes("name")) {
@@ -54,15 +55,20 @@ export default function AuthenticationPage({authType}) {
         }
     }
 
-    let heroClassName, heroContent, formContent, formSubmit, formLink, submitText
+    let heroClassName, heroMessage, formMessage, formContent, formSubmit, formLink, submitText
 
     if (authType === "login") {
         heroClassName = styles.login
 
-        heroContent = {
+        heroMessage = {
                 title: "Hope you at least get in here",
                 message: "Kidding, you probably have another app to remember the credentials for this site." 
             }
+
+        formMessage = {
+            title:"Welcome back!",
+            message:"Add your credentials"
+        }
 
         formContent = [
             { component: TextField, autoFocus: true, label: "Email", type: "email", name: "email", required:true, id: "input-email", placeholder: "Enter your email", error: error.name},
@@ -77,14 +83,18 @@ export default function AuthenticationPage({authType}) {
     } else if (authType === "signup") {
         heroClassName = styles.signup
         
-        heroContent = {
-            title: "Signup",
-            message: "Signup" 
+        heroMessage = {
+            title: "Be prepared to never ask for a forgotten door code again",
+            message: "" 
+        }
+
+        formMessage = {
+            title:"Create your account"
         }
         
         formContent = [
             { component: TextField, autoFocus: true, label: "Name", type: "text", name: "name", required: true, id: "input-name", placeholder: "Enter your name", error: error.name },
-            { component: TextField, autoFocus: true, label: "Email", type: "email", name: "email", required: true, id: "input-email", placeholder: "Enter your email", error: error.email },
+            { component: TextField, label: "Email", type: "email", name: "email", required: true, id: "input-email", placeholder: "Enter your email", error: error.email },
             { component: TextField, label: "Password", type: "password", name: "password", required:true, id: "input-password", placeholder: "Choose a password", error: error.password }
         ]
 
@@ -103,16 +113,16 @@ export default function AuthenticationPage({authType}) {
     return (
         <main className={styles.authContainer}>
             <section className={`${styles.heroContainer} ${heroClassName}`}>
-                <img className={styles.logo} src={logo} alt="GetIn logo" />
+                <Link to="/"><img className={styles.logo} src={logo} alt="GetIn logo" /></Link>
                 <div className={styles.heroMessage}>
-                    <h2 className={styles.heading2}>{heroContent.title}</h2>
-                    <p>{heroContent.message}</p>
+                    <h2 className={styles.heading2}>{heroMessage.title}</h2>
+                    <p>{heroMessage.message}</p>
                 </div>
             </section>
             <section className={styles.formContainer}>
                 <header>
-                    <h2>Welcome back</h2>
-                    <p>Enter your secret stuff and stuff</p>
+                    <h2>{formMessage.title}</h2>
+                    {formMessage && <p>{formMessage.message}</p>}
                 </header>
                 <Form generalError={error.general} authType={authType} fields={formContent} handleSubmit={formSubmit} buttonText={submitText}/>
                 <p>{formLink}</p>

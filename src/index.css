@@ -29,6 +29,7 @@
   --color-foreground-subtle: light-dark(#B0B0B0, #5a5a5a);
   --color-foreground-inverted: light-dark(#eae8e3, #101010);
   --color-foreground-subtle-inverted: light-dark(#B0B0B0, #a09e99);
+  --color-foreground-error: light-dark(#ED3519, #ED3519);
 
   --color-border: light-dark(#CFCFCF, #3a3a3a);
   --color-border-bold: light-dark(var(--color-surface-inverted), #3a3a3a);
@@ -84,30 +85,26 @@ h2 {
 
 
 /* HTML: <div class="loader"></div> */
+
 .loader {
-  width: 50px;
-  aspect-ratio: 1;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #FFF;
+  border-bottom-color: transparent;
   border-radius: 50%;
-  border: 8px solid #514b82;
-  animation:
-    l20-1 0.8s infinite linear alternate,
-    l20-2 1.6s infinite linear;
-}
-@keyframes l20-1{
-   0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
-   12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
-   25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
-   50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-   62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-   75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
-   100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
-}
-@keyframes l20-2{ 
-  0%    {transform:scaleY(1)  rotate(0deg)}
-  49.99%{transform:scaleY(1)  rotate(135deg)}
-  50%   {transform:scaleY(-1) rotate(0deg)}
-  100%  {transform:scaleY(-1) rotate(-135deg)}
-}
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
 
 
 
