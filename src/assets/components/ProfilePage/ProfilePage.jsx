@@ -5,21 +5,14 @@ import { useEffect, useState } from "react"
 import { getMe } from "../../../api/user"
 
 
-export function ProfilePage() {
+function ProfilePage() {
 
     const navigate = useNavigate()
     const { user, logout, loading } = useAuth()
     const { codes, isLoading } = useUser()
     const [codeData, setCodeData] = useState([])
 
-    useEffect(() => {
-        if (!loading && !user) navigate("/login")
-    }, [loading, user])
-
-    
-
     if (loading) return "Loading..."
-    if (!user) return null
 
     return (
         <div>
@@ -33,3 +26,5 @@ export function ProfilePage() {
         </div>
     )
 }
+
+export default ProfilePage

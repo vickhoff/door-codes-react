@@ -9,8 +9,7 @@ import { useState, useEffect, useRef } from "react"
 import { loginUser, registerUser } from "../../../api/auth"
 import { Link } from "react-router-dom"
 
-
-export default function AuthenticationPage({authType}) {
+function AuthenticationPage({authType}) {
 
     const navigate = useNavigate();
     const {setUserData, refreshUser} = useAuth()
@@ -122,3 +121,5 @@ export default function AuthenticationPage({authType}) {
         </main>
     )
 }
+
+export default AuthenticationPage

@@ -1,7 +1,7 @@
 import { ButtonLink } from "../shared/Button/ButtonLink"
 import styles from "./LandingPage.module.css"
 
-export function LandingPage() {
+function LandingPage() {
     return (
         <section>
             <h1>GetIn</h1>
@@ -14,3 +14,5 @@ export function LandingPage() {
         </section>
     )
 }
+
+export default LandingPage

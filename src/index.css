@@ -21,6 +21,7 @@
   --color-surface-inverted: light-dark(#111111, #eae8e3);
   --color-surface-accent: light-dark(#D16641, #453F73);
   --color-surface-accent-hover: light-dark(#b8411a, #453F73);
+  --color-surface-accent-subtle: light-dark(#FFC1AB, #453F73);
   --color-surface-accent-bold: light-dark(#3c2a63, #09071d);
   --color-surface-alert: light-dark(#e61111, #dc3939);
   --color-surface-raised: light-dark(#eae8e3, #101010);
@@ -30,6 +31,7 @@
   --color-foreground-inverted: light-dark(#eae8e3, #101010);
   --color-foreground-subtle-inverted: light-dark(#B0B0B0, #a09e99);
   --color-foreground-error: light-dark(#ED3519, #ED3519);
+  --color-foreground-accent: light-dark(#D16641, #453F73);
 
   --color-border: light-dark(#CFCFCF, #3a3a3a);
   --color-border-bold: light-dark(var(--color-surface-inverted), #3a3a3a);
