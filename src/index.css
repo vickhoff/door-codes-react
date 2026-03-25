@@ -5,8 +5,6 @@
 
   color-scheme: light;
 
-  --body-padding: 24px;
-
   /* Transition for color-scheme changes */
   transition: color-scheme 0.3s ease;
 
