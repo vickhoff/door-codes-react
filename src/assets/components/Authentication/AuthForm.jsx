@@ -35,8 +35,8 @@ export default function AuthForm({authType}) {
         try {
             await registerUser(newUserData)
         } catch (error) {
-            if (error.message.toLowerCase().includes("username")) {
-                setErrors(prev => ({ ...prev, name: "Username already exists" }))
+            if (error.message.toLowerCase().includes("name")) {
+                setErrors(prev => ({ ...prev, name: "Name already exists" }))
             } else if (error.message.toLowerCase().includes("email")) {
                 setErrors(prev => ({ ...prev, email: "Email already exists"}))
             } else {

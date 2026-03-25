@@ -26,17 +26,18 @@ export function AuthProvider({children}) {
         console.log("logging out")
         setUser(null)
     }
+
+    async function fetchUser() {                               
+        const response = await fetch("/api/user/me", {
+    credentials: "include" })                                  
+        if (response.ok) {
+            const data = await response.json()                 
+            setUser(data)
+        }                                                      
+        setLoading(false)
+    } 
     
     useEffect(() => {
-        async function fetchUser() {                               
-            const response = await fetch("/api/user/me", {
-        credentials: "include" })                                  
-            if (response.ok) {
-                const data = await response.json()                 
-                setUser(data)
-            }                                                      
-            setLoading(false)  // move here
-        } 
         fetchUser()
       },[]);
 
