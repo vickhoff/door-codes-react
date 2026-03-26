@@ -22,3 +22,9 @@
     font-family: var(--type-code);
     font-size: 2rem;
 }
+
+.distance {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}

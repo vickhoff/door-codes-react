@@ -1,7 +1,7 @@
 import styles from "./ListItem.module.css"
 import Tag from "../../shared/Tag/Tag"
 
-function ListItem({name, code, distance}) {
+function ListItem({name, code, distance, nearest = false}) {
 
     return (
         <div className={styles.rowContainer}>
@@ -9,8 +9,8 @@ function ListItem({name, code, distance}) {
                 <p>{name}</p>
                 <p className={styles.code}>{code}</p>
             </div>
-            <div>
-                <Tag text={"Nearest"}/>
+            <div className={styles.distance}>
+                {nearest && <Tag text={"Nearest"}/>}
                 <span>{distance} km</span>
             </div>
         </div>

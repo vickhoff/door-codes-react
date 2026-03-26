@@ -8,4 +8,5 @@
     letter-spacing: 0.5px;
     color: var(--color-foreground-accent);
     font-weight: 600;
+    line-height: 20px;
 }
