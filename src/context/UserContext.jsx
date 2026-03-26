@@ -26,30 +26,11 @@ export function UserProvider({ children }) {
         }))
     }, [codesWithDistance])
 
-        
         const distances = []
         data.map(codeItem => {
             distances.push(codeItem.distance)
         })
         const closest = Math.min(...distances)
-
-            console.log(codes)
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     const [sortByDistance, setSortByDistance] = useState(true)
 

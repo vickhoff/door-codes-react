@@ -1,0 +1,66 @@
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modalWrapper {
+    animation: fadeIn 0.5s ease-in-out;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    animation: slideIn 0.8s linear(0, 0.402 7.4%, 0.711 15.3%, 0.929 23.7%, 1.008 28.2%, 1.067 33%, 1.099 36.9%, 1.12 41%, 1.13 45.4%, 1.13 50.1%, 1.111 58.5%, 1.019 83.2%, 1.004 91.3%, 1);
+    background-color: var(--color-surface-default);
+    width: 400px;
+    border-radius: 16px;
+    padding: 32px;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.modalHeader h2 {
+    font-family: var(--type-sans);
+    font-weight: 500;
+}
+
+.closeButton {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    transition: ease-in-out 0.2s all;
+    border-radius: 8px;
+}
+
+.closeButton:hover {
+    background-color: var(--color-surface-shy);
+}
