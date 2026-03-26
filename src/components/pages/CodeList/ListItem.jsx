@@ -1,4 +1,5 @@
 import styles from "./ListItem.module.css"
+import Tag from "../../shared/Tag/Tag"
 
 function ListItem({name, code, distance}) {
 
@@ -8,9 +9,11 @@ function ListItem({name, code, distance}) {
                 <p>{name}</p>
                 <p className={styles.code}>{code}</p>
             </div>
-            <p>5m</p>
+            <div>
+                <Tag text={"Nearest"}/>
+                <span>{distance} km</span>
+            </div>
         </div>
-
     )
 }
 

@@ -3,6 +3,8 @@ import { useUser } from "../../../context/UserContext"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import CodeList from "../CodeList/CodeList"
+import PageHeader from "../../shared/PageHeader/PageHeader"
+import styles from "./ProfilePage.module.css"
 
 
 function ProfilePage() {
@@ -15,13 +17,10 @@ function ProfilePage() {
     if (loading) return "Loading..."
 
     return (
-        <>
-        <h1>Welcome {user.name}!</h1>
-        <p>What code did you forget today?</p>
-
-        <CodeList />
-
-        </>
+        <section className={styles.section}>
+            <PageHeader title={`Welcome ${user.name}`} message={"What code did you forget today?"}/>
+            <CodeList />
+        </section>
     )
 }
 

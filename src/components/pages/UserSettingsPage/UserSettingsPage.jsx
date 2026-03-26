@@ -1,7 +1,9 @@
+import PageHeader from "../../shared/PageHeader/PageHeader"
+
 function UserSettingsPage() {
 
     return (
-        <h1>User settings</h1>
+        <PageHeader title="User settings" />
     )
 }
 
