@@ -1,8 +1,8 @@
-import { TextField } from "../shared/Input/TextField"
+import { TextField } from "../../shared/Input/TextField"
 import { useState, useRef } from "react"
 import styles from "./Authentication.module.css"
 import { registerUser } from "../../../api/auth"
-import { Button } from "../shared/Button/Button"
+import { Button } from "../../shared/Button/Button"
 import { Link } from "react-router-dom"
 
 export function SignupPage() {

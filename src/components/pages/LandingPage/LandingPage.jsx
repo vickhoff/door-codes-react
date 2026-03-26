@@ -1,4 +1,4 @@
-import { ButtonLink } from "../shared/Button/ButtonLink"
+import { ButtonLink } from "../../shared/Button/ButtonLink"
 import styles from "./LandingPage.module.css"
 
 function LandingPage() {

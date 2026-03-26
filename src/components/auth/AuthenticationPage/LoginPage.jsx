@@ -1,5 +1,5 @@
-import { TextField } from "../shared/Input/TextField"
-import { Button } from "../shared/Button/Button"
+import { TextField } from "../../shared/Input/TextField"
+import { Button } from "../../shared/Button/Button"
 import { Link } from "react-router-dom"
 import { loginUser } from "../../../api/auth"
 import { useState, useEffect, useRef } from "react"

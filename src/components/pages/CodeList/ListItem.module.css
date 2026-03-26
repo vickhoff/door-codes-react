@@ -1,0 +1,30 @@
+.rowContainer {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    align-items: center;
+    padding-block: 16px;
+}
+
+.rowContainer:first-child {
+    padding-block-start: 0px;
+}
+
+.rowContainer:last-child {
+    padding-block-end: 0px;
+}
+
+.rowContainer:not(:last-child) {
+    border-block-end: 1px solid var(--color-border)
+}
+
+.code {
+    font-family: var(--type-code);
+    font-size: 2rem;
+}
+
+.distance {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
