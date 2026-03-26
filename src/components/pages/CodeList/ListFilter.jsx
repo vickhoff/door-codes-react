@@ -6,12 +6,12 @@ import { useUser } from "../../../context/UserContext"
 
 function ListFilter() {
 
-    const { setSortByDistance } = useUser()
+    const { sortByDistance, setSortByDistance } = useUser()
 
     return (
         <div className={styles.container}>
-            <button onClick={() => setSortByDistance(true)} className={styles.filterButton}>Codes near you</button>
-            <button onClick={() => setSortByDistance(false)} className={styles.filterButton}>All your codes</button>
+            <button onClick={() => setSortByDistance(true)} className={`${styles.filterButton} ${sortByDistance ? styles.active : ""}`}>Codes near you</button>
+            <button onClick={() => setSortByDistance(false)} className={`${styles.filterButton} ${!sortByDistance ? styles.active : ""}`}>All your codes</button>
             <Button text="Add a code" variant="primary"/>
         </div>
     )

@@ -3,6 +3,7 @@ import styles from "./CodeList.module.css"
 import ListItem from "./ListItem"
 import { useUser } from "../../../context/UserContext"
 import SkeletonList from "./SkeletonList/SkeletonList"
+import Button from "../../shared/Button/Button"
 
 function CodeList() {
 
@@ -25,14 +26,22 @@ function CodeList() {
 
 
     const codeList = sortedCodes.map(codeItem => (
-        <ListItem key={codeItem._id} name={codeItem.name} code={codeItem.code} distance={codeItem.distance} />
+        <ListItem key={codeItem._id} name={codeItem.name} code={codeItem.code} distance={codeItem.distance} isClosest={codeItem.isClosest} />
     ))
 
     return (
         <div>
             <ListFilter />
             <div className={styles.listContainer}>
-                {isLoading ? <SkeletonList /> : codeList}
+                {isLoading
+                    ? <SkeletonList />
+                    : sortedCodes.length === 0
+                        ? <div className={styles.emptyState}>
+                            <p>No codes added yet 😢</p>
+                            <Button variant="primary" text="Add your first code" />
+                        </div>  
+                        : codeList
+                } 
             </div>
         </div>
     )

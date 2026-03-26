@@ -10,6 +10,7 @@
     content: "";
     position: fixed;                                                                 
     inset: 0;
+    background-color: black;
     background-image: url("../../../assets/images/bg.jpg");                                    
     background-size: cover;
     background-position: center;

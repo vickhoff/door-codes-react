@@ -13,5 +13,13 @@
     padding-block-start: 34px;
     padding-block-end: 28px;
     color: var(--color-foreground-default);
+}
 
+.emptyState {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    gap: 16px;
+    text-align: center;
 }
