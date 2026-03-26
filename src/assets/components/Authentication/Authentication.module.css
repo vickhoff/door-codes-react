@@ -14,9 +14,10 @@
 
 .authContainer {
     display: flex;
-    height: calc(100vh - var(--body-padding) * 2);
+    height: calc(100vh - 16px * 2);
     width: 100%;
     gap: 24px;
+    padding: 16px;
 }
 
 .formContainer,
@@ -70,6 +71,9 @@
 .logoCentered {
     margin-inline: auto;
 }
+.logoCentered {                                                          
+    display: none;
+}
 
 .logoMobile {
     display: none;
@@ -91,6 +95,10 @@
 
     .heading2 {
         font-size: 3.2rem;
+    }
+
+    .heroContainer {
+        padding: 40px;
     }
 }
 

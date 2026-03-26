@@ -1,4 +1,4 @@
-import {Button} from "../Button/Button"
+import Button from "../Button/Button"
 import styles from "./Form.module.css"
 import {useState} from "react"
 

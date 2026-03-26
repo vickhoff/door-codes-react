@@ -10,7 +10,7 @@ function LoggedInLayout() {
         <div className={styles.container}>
             <div className={styles.layout}></div>
             <NavBar />
-            <main>
+            <main className={styles.loggedInMain}>
                 <Outlet />
             </main>
         </div>
