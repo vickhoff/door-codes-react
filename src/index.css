@@ -98,6 +98,10 @@ h2 {
   animation: rotation 1s linear infinite;
   }
 
+  .loader .accent {
+    border: 3px solid var(--color-foreground-accent);
+  }
+
   @keyframes rotation {
   0% {
       transform: rotate(0deg);
