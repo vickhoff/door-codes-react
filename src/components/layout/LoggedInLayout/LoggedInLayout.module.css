@@ -1,0 +1,30 @@
+@keyframes pulse {                                                                   
+    0%   { transform: scale(1) translate(0, 0); filter: brightness(1); }             
+    25%  { transform: scale(1.05) translate(-1%, 1%); filter: brightness(1.05); }    
+    50%  { transform: scale(1.1) translate(1%, -1%); filter: brightness(0.97); }    
+    75%  { transform: scale(1.04) translate(-0.5%, 0.5%); filter: brightness(1.03); }
+    100% { transform: scale(1) translate(0, 0); filter: brightness(1); }             
+}   
+
+.layout::before {
+    content: "";
+    position: fixed;                                                                 
+    inset: 0;
+    background-image: url("../../../assets/images/bg.jpg");                                    
+    background-size: cover;
+    background-position: center;
+    animation: pulse 10s ease-in-out infinite; 
+    z-index: -1;                                                                     
+}
+
+.container {
+    max-width: 800px;
+    margin-inline: auto;
+    color: var(--color-foreground-inverted);
+    padding-block-start: 24px;
+    margin-block-end: 94px;
+}
+
+.loggedInMain h1 {
+    margin-block-end: 8px;
+}

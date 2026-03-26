@@ -1,0 +1,17 @@
+.codesContainer {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface-default);
+    border-radius: 16px;
+    padding-inline: 40px;
+    padding-block-start: 34px;
+    padding-block-end: 28px;
+    color: var(--color-foreground-default);
+
+}
