@@ -5,7 +5,7 @@ import { useUser } from "../../../context/UserContext"
 import SkeletonList from "./SkeletonList/SkeletonList"
 import Button from "../../shared/Button/Button"
 
-function CodeList() {
+function CodeList({onAddCode}) {
 
     const { codes, isLoading, sortByDistance, setSortByDistance } = useUser()
 
@@ -31,7 +31,7 @@ function CodeList() {
 
     return (
         <div>
-            <ListFilter />
+            <ListFilter onAddCode={onAddCode} />
             <div className={styles.listContainer}>
                 {isLoading
                     ? <SkeletonList />
