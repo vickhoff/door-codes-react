@@ -38,7 +38,7 @@ function CodeList() {
                     : sortedCodes.length === 0
                         ? <div className={styles.emptyState}>
                             <p>No codes added yet 😢</p>
-                            <Button variant="primary" text="Add your first code" />
+                            <Button text="Add your first code" />
                         </div>  
                         : codeList
                 } 
