@@ -32,8 +32,23 @@
      }
   }
 
+  .ghost {
+    border: none;
+    background-color: transparent;
+  }
+
+  .buttonGroup {
+    display:flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
   a.buttonLink {
     text-decoration: none;
+  }
+
+  .fullWidth {
+    width: 100%;
   }
 
   button:focus,

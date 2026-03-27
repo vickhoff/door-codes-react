@@ -18,28 +18,12 @@ function ProfilePage() {
     const { codes, isLoading } = useUser()
     const[showModal, setShowModal] = useState(false)
 
-
-    const formContent = [
-        { component: TextField, autoFocus: true, label: "Code title", name: "title", required:true, id: "input-title", error: "error.name"},
-        { component: TextField, label: "Address", name: "address", required: true, id: "input-address", error: "error.password"},
-        { component: TextField, label: "Code", name: "code", required: true, id: "input-code", error: "error.password"}
-    ]
-
-
     if (loading) return "Loading..."
 
     return (
         <section className={styles.section}>
             <PageHeader title={`Welcome ${user.name}`} message={"What code did you forget today?"}/>
             <CodeList />
-            <button onClick={() => setShowModal(true)}>
-        Show modal using a portal
-      </button>
-      {showModal && createPortal(
-        <Modal title="Edit code" onClose={() => setShowModal(false)}>
-            <Form fields={formContent} buttonText={"Save"}/>
-        </Modal>,document.body
-      )}
         </section>
     )
 }
