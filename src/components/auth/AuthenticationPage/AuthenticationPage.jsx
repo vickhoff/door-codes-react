@@ -44,7 +44,7 @@ function AuthenticationPage({authType}) {
         }
     }
 
-    let heroClassName, heroMessage, formMessage, formContent, formSubmit, formLink, submitText
+    let heroClassName, heroMessage, formMessage, formContent, formSubmit, formLink, submitText, buttons
 
     if (authType === "login") {
         heroClassName = styles.login
@@ -63,6 +63,8 @@ function AuthenticationPage({authType}) {
             { component: TextField, autoFocus: true, label: "Email", type: "email", name: "email", required:true, id: "input-email", placeholder: "Enter your email", error: error.name},
             { component: TextField, label: "Password", type: "password", name: "password", required: true, id: "input-password", placeholder: "Enter your password", error: error.password}
         ]
+
+        buttons = [{variant: "primary", text: "Login", onClick: handleLoginForm}]
         
         formSubmit = handleLoginForm
 
@@ -85,6 +87,10 @@ function AuthenticationPage({authType}) {
             { component: TextField, autoFocus: true, label: "Name", type: "text", name: "name", required: true, id: "input-name", placeholder: "Enter your name", error: error.name },
             { component: TextField, label: "Email", type: "email", name: "email", required: true, id: "input-email", placeholder: "Enter your email", error: error.email },
             { component: TextField, label: "Password", type: "password", name: "password", required:true, id: "input-password", placeholder: "Choose a password", error: error.password }
+        ]
+
+        buttons = [
+            {variant: "primary", text: "Signup", onClick: handleSignupForm},
         ]
 
         formSubmit = handleSignupForm
@@ -115,7 +121,7 @@ function AuthenticationPage({authType}) {
                     <h2>{formMessage.title}</h2>
                     {formMessage && <p>{formMessage.message}</p>}
                 </header>
-                <Form generalError={error.general} authType={authType} fields={formContent} handleSubmit={formSubmit} buttonText={submitText}/>
+                <Form generalError={error.general} authType={authType} fields={formContent} buttons={buttons} handleSubmit={formSubmit} primaryText={submitText}/>
                 <p>{formLink}</p>
             </section>
         </main>

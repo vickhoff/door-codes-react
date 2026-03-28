@@ -13,3 +13,14 @@
     color: var(--color-foreground-error);
     text-align:center;
 }
+
+.buttonContainer {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.fullWidthSubmit {
+    width: 100%;
+  }

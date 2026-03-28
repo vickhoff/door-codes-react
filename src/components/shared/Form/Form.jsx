@@ -2,7 +2,7 @@ import Button from "../Button/Button"
 import styles from "./Form.module.css"
 import {useState} from "react"
 
-export default function Form({fields, handleSubmit, buttonText, generalError}) {
+export default function Form({fields, buttons, handleSubmit, generalError}) {
 
     const [blurErrors, setBlurErrors] = useState({})
 
@@ -23,7 +23,12 @@ export default function Form({fields, handleSubmit, buttonText, generalError}) {
 
             { generalError && <p className={styles.generalFormError}>{generalError}</p> }
 
-            <Button className={styles.extraTopMargin} text={buttonText} variant={"primary"}/>
+            <div className={styles.buttonContainer}>
+                {buttons.map(button => (
+                    <Button key={button.text} className={buttons.length === 1 ? styles.fullWidthSubmit : ""} variant={button.variant} text={button.text} onClick={button.onClick} />
+                ))}
+            </div>
+
         </form>
     )
 }

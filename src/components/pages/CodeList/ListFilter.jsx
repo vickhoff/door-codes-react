@@ -3,8 +3,7 @@ import styles from "./ListFilter.module.css"
 import { useUser } from "../../../context/UserContext"
 
 
-
-function ListFilter() {
+function ListFilter({onAddCode}) {
 
     const { sortByDistance, setSortByDistance } = useUser()
 
@@ -12,7 +11,7 @@ function ListFilter() {
         <div className={styles.container}>
             <button onClick={() => setSortByDistance(true)} className={`${styles.filterButton} ${sortByDistance ? styles.active : ""}`}>Codes near you</button>
             <button onClick={() => setSortByDistance(false)} className={`${styles.filterButton} ${!sortByDistance ? styles.active : ""}`}>All your codes</button>
-            <Button text="Add a code" variant="primary"/>
+            <Button onClick={onAddCode} text="Add a code" variant="primary"/>
         </div>
     )
 }
