@@ -30,7 +30,7 @@ export function useFetchAPI(url, initialValue) {
         fetchData()
     },[])
 
-    return { data, isLoading }
+    return { data, isLoading, setData }
 }
 
 // export async function getMe() {

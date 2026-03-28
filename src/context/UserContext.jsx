@@ -6,7 +6,9 @@ const UserContext = createContext()
 
 export function UserProvider({ children }) {
 
-    const { data, isLoading } = useFetchAPI("/api/items", [])
+    const { data, setData, isLoading } = useFetchAPI("/api/items", [])
+
+
 
     function randomDistance() {
         const minCeiled = Math.ceil(1);
@@ -26,12 +28,6 @@ export function UserProvider({ children }) {
         }))
     }, [codesWithDistance])
 
-    const distances = []
-
-    data.map(codeItem => {
-        distances.push(codeItem.distance)
-    })
-
     const [sortByDistance, setSortByDistance] = useState(true)
 
     async function addCodeItem(codeData) {
@@ -39,7 +35,7 @@ export function UserProvider({ children }) {
             method: "POST",
             headers: {
                 Accept: "application/json",
-                "Content": "application/json",
+                "Content-Type": "application/json",
             },
             credentials: "include",
             body: JSON.stringify(codeData),
@@ -48,8 +44,8 @@ export function UserProvider({ children }) {
             const error = await response.json()
             throw new Error(error.message || "Something went wrong")
         }
-        console.log("Item added!")
-        return response.json()
+        const savedItem = await response.json()
+        setData(prev => [...prev, savedItem])
     }
 
     return (
