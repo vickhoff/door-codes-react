@@ -8,8 +8,6 @@ export function UserProvider({ children }) {
 
     const { data, setData, isLoading: isLoadingCodes } = useFetchAPI("/api/items", [])
 
-
-
     function randomDistance() {
         const minCeiled = Math.ceil(1);
         const maxFloored = Math.floor(100);

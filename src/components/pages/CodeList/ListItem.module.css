@@ -4,6 +4,11 @@
     font-weight: 500;
     align-items: center;
     padding-block: 16px;
+    cursor: pointer;
+}
+
+.rowContainer:hover {
+    background-color: var(--color-surface-accent-subtle);
 }
 
 .rowContainer:first-child {
@@ -28,3 +33,4 @@
     gap: 8px;
     justify-content: center;
 }
+

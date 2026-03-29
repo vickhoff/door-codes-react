@@ -23,4 +23,11 @@
 
 .fullWidthSubmit {
     width: 100%;
-  }
+}
+
+.spinnerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
