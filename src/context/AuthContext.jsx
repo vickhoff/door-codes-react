@@ -4,7 +4,7 @@ const AuthContext = createContext(null)
 
 export function AuthProvider({children}) {
     const[user, setUser] = useState(null)
-    const[isLoadingAuth, setLoading] = useState(true)
+    const[loading, setLoading] = useState(true)
 
     function setUserData(user) {
         setUser(user)
@@ -23,7 +23,6 @@ export function AuthProvider({children}) {
             method: "POST",
             credentials: "include"
         })
-        console.log("logging out")
         setUser(null)
     }
 
@@ -43,7 +42,7 @@ export function AuthProvider({children}) {
 
 
       return (
-        <AuthContext.Provider value={{user, isLoadingAuth, setUserData, refreshUser, logout}}>
+        <AuthContext.Provider value={{user, loading, setUserData, refreshUser, logout}}>
             {children}
         </AuthContext.Provider>
     )
