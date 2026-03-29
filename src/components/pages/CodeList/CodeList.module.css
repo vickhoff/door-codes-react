@@ -9,9 +9,8 @@
     flex-direction: column;
     background: var(--color-surface-default);
     border-radius: 16px;
-    padding-inline: 40px;
-    padding-block-start: 34px;
-    padding-block-end: 28px;
+    padding-inline: 24px;
+    padding-block: 24px;
     color: var(--color-foreground-default);
 }
 

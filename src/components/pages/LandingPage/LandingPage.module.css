@@ -2,15 +2,12 @@
     display: flex;
     flex-direction: column;
     gap: 64px;
-    max-width: 900px;
-    margin-inline: auto;
     color: white;
     background-image: url("../../../assets/images/hero.png");
     background-size: cover;
-    margin-block-start: 100px;
+    background-position: right;
     padding-block: 60px;
     padding-inline-start: 60px;
-    border-radius: 40px;
 }
 
 .logo {
