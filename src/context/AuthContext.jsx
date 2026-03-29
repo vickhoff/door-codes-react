@@ -4,7 +4,7 @@ const AuthContext = createContext(null)
 
 export function AuthProvider({children}) {
     const[user, setUser] = useState(null)
-    const[loading, setLoading] = useState(true)
+    const[isLoadingAuth, setLoading] = useState(true)
 
     function setUserData(user) {
         setUser(user)
@@ -43,7 +43,7 @@ export function AuthProvider({children}) {
 
 
       return (
-        <AuthContext.Provider value={{user, loading, setUserData, refreshUser, logout}}>
+        <AuthContext.Provider value={{user, isLoadingAuth, setUserData, refreshUser, logout}}>
             {children}
         </AuthContext.Provider>
     )

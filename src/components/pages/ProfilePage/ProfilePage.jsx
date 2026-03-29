@@ -12,11 +12,11 @@ import AddModal from "../CodeList/AddModal"
 function ProfilePage() {
 
     const navigate = useNavigate()
-    const { user, logout, loading } = useAuth()
-    const { codes, isLoading } = useUser()
+    const { user, logout, isLoadingAuth } = useAuth()
+    const { codes, isLoadingCodes } = useUser()
     const [showModal, setShowModal] = useState(false)
 
-    if (loading) return "Loading..."
+    if (isLoadingAuth) return "Loading..."
 
     return (
         <section className={styles.section}>

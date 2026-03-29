@@ -7,7 +7,7 @@ import Button from "../../shared/Button/Button"
 
 function CodeList({onAddCode}) {
 
-    const { codes, isLoading, sortByDistance, setSortByDistance } = useUser()
+    const { codes, isLoadingCodes, sortByDistance, setSortByDistance } = useUser()
 
 
     function sortCodes(array, value) {
@@ -33,7 +33,7 @@ function CodeList({onAddCode}) {
         <div>
             <ListFilter onAddCode={onAddCode} />
             <div className={styles.listContainer}>
-                {isLoading
+                {isLoadingCodes
                     ? <SkeletonList />
                     : sortedCodes.length === 0
                         ? <div className={styles.emptyState}>

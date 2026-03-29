@@ -1,13 +1,17 @@
 import { ButtonLink } from "../../shared/Button/ButtonLink"
+import logo from "../../../assets/images/logo-white.svg"
 import styles from "./LandingPage.module.css"
 
 function LandingPage() {
     return (
-        <section>
-            <h1>GetIn</h1>
-            <p>When you need the code - RIGHT NOW</p>
+        <section className={styles.hero}>
+            <img className={styles.logo} src={logo} alt="GetIn logotype" />
+            <div className={styles.titleGroup}>
+                <h1 className={styles.title}>When you need the code - Right now</h1>
+                <p>Do you also keep forgetting your friends door codes? Never again </p>
+            </div>
             <div className={styles.buttonGroup}>
-                <ButtonLink path={"/signup"} variant="primary" text="Signup"/>
+                <ButtonLink path={"/signup"} variant="primary" text="Create account"/>
                 <ButtonLink path={"/login"} text="Login"/>
             </div>
 

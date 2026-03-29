@@ -6,7 +6,7 @@ const UserContext = createContext()
 
 export function UserProvider({ children }) {
 
-    const { data, setData, isLoading } = useFetchAPI("/api/items", [])
+    const { data, setData, isLoadingCodes } = useFetchAPI("/api/items", [])
 
 
 
@@ -49,7 +49,7 @@ export function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value={{ codes, isLoading, sortByDistance, setSortByDistance, addCodeItem }}>
+        <UserContext.Provider value={{ codes, isLoadingCodes, sortByDistance, setSortByDistance, addCodeItem }}>
             {children}
         </UserContext.Provider>
     )
