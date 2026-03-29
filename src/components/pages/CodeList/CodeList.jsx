@@ -22,11 +22,13 @@ function CodeList({onAddCode}) {
     const allCodes = sortCodes(codes, "name")
     const sortedCodes = sortByDistance ? nearCodes : allCodes
 
-
+    function handleRowClick(event) {
+            console.log(event.target)
+    }
 
 
     const codeList = sortedCodes.map(codeItem => (
-        <ListItem key={codeItem._id} name={codeItem.name} code={codeItem.code} distance={codeItem.distance} isClosest={codeItem.isClosest} />
+        <ListItem onClick={handleRowClick} key={codeItem._id} name={codeItem.name} code={codeItem.code} distance={codeItem.distance} isClosest={codeItem.isClosest} />
     ))
 
     return (

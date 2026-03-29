@@ -6,7 +6,7 @@ const UserContext = createContext()
 
 export function UserProvider({ children }) {
 
-    const { data, setData, isLoadingCodes } = useFetchAPI("/api/items", [])
+    const { data, setData, isLoading: isLoadingCodes } = useFetchAPI("/api/items", [])
 
 
 

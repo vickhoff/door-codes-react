@@ -12,18 +12,17 @@ import AddModal from "../CodeList/AddModal"
 function ProfilePage() {
 
     const navigate = useNavigate()
-    const { user, logout, isLoadingAuth } = useAuth()
-    const { codes, isLoadingCodes } = useUser()
-    const [showModal, setShowModal] = useState(false)
+    const { user, isLoadingAuth } = useAuth()
+    const [showAddModal, setShowAddModal] = useState(false)
 
-    if (isLoadingAuth) return "Loading..."
+    if (isLoadingAuth) return <h1>Loading...</h1>
 
     return (
         <section className={styles.section}>
             <PageHeader title={`Welcome ${user.name}`} message={"What code did you forget today?"}/>
-            <CodeList onAddCode={() => setShowModal(true)} />
-            {showModal && createPortal(
-                <AddModal onClose={() => setShowModal(false)} />,
+            <CodeList onAddCode={() => setShowAddModal(true)} />
+            {showAddModal && createPortal(
+                <AddModal onClose={() => setShowAddModal(false)} />,
                 document.body
             )}
         </section>

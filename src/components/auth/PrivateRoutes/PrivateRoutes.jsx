@@ -3,8 +3,8 @@ import { useAuth } from "../../../context/AuthContext"
 
 
 function PrivateRoutes() {
-    const { user, isLoadingAuth } = useAuth()
-    if (isLoadingAuth) return null
+    const { user, loading } = useAuth()
+    if (loading) return null
     return user ? <Outlet/> : <Navigate to='/login'/>
 }
 
