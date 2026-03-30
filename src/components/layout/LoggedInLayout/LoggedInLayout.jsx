@@ -14,7 +14,7 @@ function LoggedInLayout() {
 
         <div className={styles.container}>
             <div className={styles.layout}></div>
-            <header>
+            <header className={styles.loggedInMenu}>
                 <NavBar pages={pages} theme={"dark"}/>
             </header>
             <main className={styles.loggedInMain}>

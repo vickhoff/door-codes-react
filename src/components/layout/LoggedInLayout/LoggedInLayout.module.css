@@ -25,3 +25,7 @@
     padding-block-start: 24px;
     margin-block-end: 94px;
 }
+.loggedInMenu {
+    margin-block-start: 24px;  
+    margin-block-end: 72px;    
+}

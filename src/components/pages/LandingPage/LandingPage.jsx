@@ -1,32 +1,43 @@
 import { ButtonLink } from "../../shared/Button/ButtonLink"
-import logo from "../../../assets/images/logo-white.svg"
+import LogoBlack from "../../../assets/images/logo-black.svg"
+import Hero1 from "../../../assets/images/hero-1.png"
+import Hero2 from "../../../assets/images/hero-2.png"
 import styles from "./LandingPage.module.css"
 import NavBar from "../../shared/NavBar/NavBar"
+import { Link } from "react-router"
 
 function LandingPage() {
 
     const pages = [
-        {title: "How does it work?", url: ""},
+        {title: "How does it work?", url: "/"},
         {title: "User stories", url: "#stories"},
         {title: "Prices", url: "#prices"},
         {title: "Contact us", url: "#contact"}
     ]
 
     return (
-        <>
-            <header><NavBar theme={"light"} pages={pages} /></header>
+            <>
+            <header className={styles.landingMenu}>                
+                <img className={styles.logo} src={LogoBlack} alt="GetIn logotype" />
+                <NavBar theme={"light"} pages={pages} />
+                <div className={styles.linkGroup}>
+                    <Link to="/login">Login</Link>
+                    <Link to="/signup">Signup</Link>
+                </div>
+            </header>
+            <div className={styles.wrapper}>
             <section className={styles.hero}>
-                <img className={styles.logo} src={logo} alt="GetIn logotype" />
                 <div className={styles.titleGroup}>
                     <h1 className={styles.title}>When you need the code - Right now</h1>
                     <p>Do you also keep forgetting your friends door codes? Never again </p>
                 </div>
-                <div className={styles.buttonGroup}>
-                    <ButtonLink path={"/signup"} variant="primary" text="Create account"/>
-                    <ButtonLink path={"/login"} text="Login"/>
-                </div>
-
+                    <ButtonLink path={"/signup"} variant="primary" text="Request a demo"/> 
             </section>
+            <section className={styles.imgContainer}>
+                <img src={Hero1} alt="Man asking friend for door code" />
+                <img src={Hero2} alt="Woman asking friend for door code" />
+            </section>
+        </div>
         </>
     )
 }
