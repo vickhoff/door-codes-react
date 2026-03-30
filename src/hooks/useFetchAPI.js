@@ -9,8 +9,6 @@ export function useFetchAPI(url, initialValue) {
             const response = await fetch(url, {
                 credentials: "include"
             })
-            
-            //Try to use useMemo around the data
 
             if(!response.ok) {
                 const error = await response.json()
