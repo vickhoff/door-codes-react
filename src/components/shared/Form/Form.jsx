@@ -3,7 +3,7 @@ import styles from "./Form.module.css"
 import {useState} from "react"
 import Spinner from "../Spinner/Spinner"
 
-export default function Form({fields, buttons, handleSubmit, generalError, isLoading}) {
+export default function Form({fields, buttons, handleSubmit, generalError, isLoading, type}) {
 
     const [blurErrors, setBlurErrors] = useState({})
 
@@ -18,6 +18,9 @@ export default function Form({fields, buttons, handleSubmit, generalError, isLoa
 
     if (isLoading) return <div className={styles.spinnerContainer}><Spinner variant={"accent"}/></div>
 
+    const destructiveButton = buttons.filter(button => button.variant === "destructive")
+    const nonDestructiveButtons = buttons.filter(button => button.variant != "destructive")
+
     return (
 
         <form className={styles.form} action={handleSubmit}>
@@ -27,10 +30,13 @@ export default function Form({fields, buttons, handleSubmit, generalError, isLoa
 
             { generalError && <p className={styles.generalFormError}>{generalError}</p> }
 
-            <div className={styles.buttonContainer}>
-                {buttons.map(button => (
-                    <Button key={button.text} className={buttons.length === 1 ? styles.fullWidthSubmit : ""} variant={button.variant} text={button.text} onClick={button.onClick} />
-                ))}
+            <div className={styles.buttonWrapper}>
+                {destructiveButton.length > 0 && destructiveButton.map(button => <Button key={button.text} variant={button.variant} type={button.type} text={button.text} onClick={button.onClick} />)}
+                <div className={styles.buttonContainer}>
+                    {nonDestructiveButtons.map(button => (
+                        <Button key={button.text} className={buttons.length === 1 ? styles.fullWidthSubmit : ""} variant={button.variant} type={button.type} text={button.text} onClick={button.onClick} />
+                    ))}
+                </div>
             </div>
 
         </form>

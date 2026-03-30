@@ -21,9 +21,10 @@
   --color-surface-inverted: light-dark(#111111, #eae8e3);
   --color-surface-accent: light-dark(#D16641, #453F73);
   --color-surface-accent-hover: light-dark(#b8411a, #453F73);
-  --color-surface-accent-subtle: light-dark(#FFE2D9, #453F73);
+  --color-surface-accent-subtle: light-dark(#faece7, #453F73);
   --color-surface-accent-bold: light-dark(#3c2a63, #09071d);
-  --color-surface-alert: light-dark(#e61111, #dc3939);
+  --color-surface-error: light-dark(#e61111, #dc3939);
+  --color-surface-error-subtle: light-dark(#f7e6e6, #dc3939);
   --color-surface-raised: light-dark(#eae8e3, #101010);
 
   --color-foreground-default: light-dark(#333, #EAE8E3);

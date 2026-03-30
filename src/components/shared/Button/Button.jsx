@@ -6,6 +6,7 @@ function Button({ text, variant = "secondary", className, ...rest}) {
         const primary = styles.primary
         const secondary = styles.secondary
         const ghost = styles.ghost
+        const destructive = styles.destructive
 
         let buttonVariant = secondary
 
@@ -15,6 +16,8 @@ function Button({ text, variant = "secondary", className, ...rest}) {
                 buttonVariant = secondary
         } else if (variant === "ghost") {
                 buttonVariant = ghost
+        } else if (variant === "destructive") {
+                buttonVariant = destructive
         }
 
         const { pending } = useFormStatus()

@@ -35,6 +35,21 @@
   .ghost {
     border: none;
     background-color: transparent;
+    transition: 0.2s ease-in-out all;
+  }
+
+  .ghost:hover {
+    background-color: var(--color-surface-shy);
+  }
+
+  .destructive {
+    color: var(--color-foreground-error);
+    background-color: transparent;
+    transition: 0.2s ease-in-out all;
+  }
+
+  .destructive:hover {
+    background-color: var(--color-surface-error-subtle);
   }
 
   .buttonGroup {

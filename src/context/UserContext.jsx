@@ -62,12 +62,26 @@ export function UserProvider({ children }) {
         }
         const { data: savedItem } = await response.json()
         setData(prev => prev.map(codeItem => codeItem._id === id ? savedItem : codeItem))
+    }
 
-        console.log(savedItem)
+    async function deleteCodeItem(id) {
+        console.log(id)
+        const response = await fetch(`/api/items/delete/${id}`, {
+            method: "DELETE",
+            credentials: "include",
+        })
+        if (!response.ok) {
+            const error = await response.json()
+            throw new Error(error.message || "Something went wrong")
+        }
+
+
+        // const { data: savedItem } = await response.json()
+        // setData(prev => prev.map(codeItem => codeItem._id === id ? savedItem : codeItem))
     }
 
     return (
-        <UserContext.Provider value={{ codes, isLoadingCodes, sortByDistance, setSortByDistance, addCodeItem, updateCodeItem }}>
+        <UserContext.Provider value={{ codes, isLoadingCodes, sortByDistance, setSortByDistance, addCodeItem, updateCodeItem, deleteCodeItem }}>
             {children}
         </UserContext.Provider>
     )
