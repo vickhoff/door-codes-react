@@ -8,8 +8,6 @@ export function UserProvider({ children }) {
 
     const { data, setData, isLoading: isLoadingCodes } = useFetchAPI("/api/items", [])
 
-
-
     function randomDistance() {
         const minCeiled = Math.ceil(1);
         const maxFloored = Math.floor(100);
@@ -48,8 +46,28 @@ export function UserProvider({ children }) {
         setData(prev => [...prev, savedItem])
     }
 
+    async function updateCodeItem(codeData, id) {
+        const response = await fetch(`/api/items/update/${id}`, {
+            method: "PATCH",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify(codeData),
+        })
+        if (!response.ok) {
+            const error = await response.json()
+            throw new Error(error.message || "Something went wrong")
+        }
+        const { data: savedItem } = await response.json()
+        setData(prev => prev.map(codeItem => codeItem._id === id ? savedItem : codeItem))
+
+        console.log(savedItem)
+    }
+
     return (
-        <UserContext.Provider value={{ codes, isLoadingCodes, sortByDistance, setSortByDistance, addCodeItem }}>
+        <UserContext.Provider value={{ codes, isLoadingCodes, sortByDistance, setSortByDistance, addCodeItem, updateCodeItem }}>
             {children}
         </UserContext.Provider>
     )

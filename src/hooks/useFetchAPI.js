@@ -9,8 +9,6 @@ export function useFetchAPI(url, initialValue) {
             const response = await fetch(url, {
                 credentials: "include"
             })
-            
-            //Try to use useMemo around the data
 
             if(!response.ok) {
                 const error = await response.json()
@@ -32,17 +30,3 @@ export function useFetchAPI(url, initialValue) {
 
     return { data, isLoading, setData }
 }
-
-// export async function getMe() {
-//     const response = await fetch("/api/items", {
-//         credentials: "include"
-//     })
-
-//     if (!response.ok) {
-//         const error = await response.json()
-//         throw new Error(error.message || "Something went wrong")
-//     }
-//     const data = await response.json()
-
-//     return data
-// }

@@ -7,7 +7,6 @@ import AuthenticationPage from "./components/auth/AuthenticationPage/Authenticat
 import LoggedInLayout from "./components/layout/LoggedInLayout/LoggedInLayout"
 import PrivateRoutes from "./components/auth/PrivateRoutes/PrivateRoutes"
 import UserSettingsPage from "./components/pages/UserSettingsPage/UserSettingsPage"
-import EditModal from "./components/pages/CodeList/EditModal"
 
 function App() {
   return (
@@ -22,7 +21,6 @@ function App() {
             <Route element={<UserProvider><LoggedInLayout /></UserProvider>}>
               <Route path="me" element={<ProfilePage />} />
               <Route path="settings" element={<UserSettingsPage />} />
-              <Route path="items/:codeId" element={<EditModal />}/>
             </Route>
           </Route>  
 

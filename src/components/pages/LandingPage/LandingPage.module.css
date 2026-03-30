@@ -1,20 +1,27 @@
+.wrapper {
+    max-width: 900px;
+    margin-inline: auto;
+    padding-inline: 24px;
+}
+
+.landingMenu {
+    padding-block-start: 32px;
+    padding-inline: 24px;
+    display: flex;
+    justify-content:space-between;
+}
+
 .hero {
     display: flex;
     flex-direction: column;
-    gap: 64px;
-    max-width: 900px;
-    margin-inline: auto;
-    color: white;
-    background-image: url("../../../assets/images/hero.png");
-    background-size: cover;
-    margin-block-start: 100px;
+    align-items: center;
+    gap: 40px;
     padding-block: 60px;
-    padding-inline-start: 60px;
-    border-radius: 40px;
 }
 
 .logo {
-    width: 70px;
+    height: 24px;
+    width: auto;
 }
 
 .title {
@@ -23,10 +30,32 @@
 }
 
 .titleGroup {
-    max-width: 60%;
+    width: 60%;
+    text-align: center;
 }
 
 .buttonGroup {
     display: flex;
     gap: 16px;
+}
+
+.linkGroup {
+    display: flex;
+    gap: 16px;
+}
+
+.imgContainer {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 8px;
+    height: 400px;
+}
+
+.imgContainer img {
+    display: block;
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: bottom left
 }

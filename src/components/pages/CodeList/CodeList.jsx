@@ -5,9 +5,9 @@ import { useUser } from "../../../context/UserContext"
 import SkeletonList from "./SkeletonList/SkeletonList"
 import Button from "../../shared/Button/Button"
 
-function CodeList({onAddCode}) {
+function CodeList({onAddCode, onEditCode}) {
 
-    const { codes, isLoadingCodes, sortByDistance, setSortByDistance } = useUser()
+    const { codes, isLoadingCodes, sortByDistance } = useUser()
 
 
     function sortCodes(array, value) {
@@ -22,13 +22,8 @@ function CodeList({onAddCode}) {
     const allCodes = sortCodes(codes, "name")
     const sortedCodes = sortByDistance ? nearCodes : allCodes
 
-    function handleRowClick(event) {
-            console.log(event.target)
-    }
-
-
     const codeList = sortedCodes.map(codeItem => (
-        <ListItem onClick={handleRowClick} key={codeItem._id} name={codeItem.name} code={codeItem.code} distance={codeItem.distance} isClosest={codeItem.isClosest} />
+        <ListItem onClick={onEditCode} id={codeItem._id} key={codeItem._id} name={codeItem.name} code={codeItem.code} distance={codeItem.distance} isClosest={codeItem.isClosest} />
     ))
 
     return (

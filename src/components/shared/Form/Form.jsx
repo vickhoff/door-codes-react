@@ -1,8 +1,9 @@
 import Button from "../Button/Button"
 import styles from "./Form.module.css"
 import {useState} from "react"
+import Spinner from "../Spinner/Spinner"
 
-export default function Form({fields, buttons, handleSubmit, generalError}) {
+export default function Form({fields, buttons, handleSubmit, generalError, isLoading}) {
 
     const [blurErrors, setBlurErrors] = useState({})
 
@@ -15,7 +16,10 @@ export default function Form({fields, buttons, handleSubmit, generalError}) {
         }
     }
 
+    if (isLoading) return <div className={styles.spinnerContainer}><Spinner variant={"accent"}/></div>
+
     return (
+
         <form className={styles.form} action={handleSubmit}>
             {fields.map(({ component: Component, ...field}) => (
                 <Component key={field.name} {...field} onBlur={handleBlur} error={field.error || blurErrors[field.name]} />

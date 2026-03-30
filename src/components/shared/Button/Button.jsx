@@ -1,5 +1,6 @@
 import { useFormStatus } from "react-dom"
 import styles from "./Button.module.css"
+import Spinner from "../Spinner/Spinner"
 
 function Button({ text, variant = "secondary", className, ...rest}) {
         const primary = styles.primary
@@ -16,12 +17,11 @@ function Button({ text, variant = "secondary", className, ...rest}) {
                 buttonVariant = ghost
         }
 
-        //const buttonVariant = variant === "secondary" ? styles.secondary : styles.primary;
         const { pending } = useFormStatus()
 
         return <button 
                 className={`${styles.button} ${buttonVariant} ${className ?? ""}`} 
-                disabled={pending} {...rest}>{pending ? <span className="loader" /> : text}
+                disabled={pending} {...rest}>{pending ? <Spinner variant={"inverted"} /> : text}
                 </button>
 }
 
