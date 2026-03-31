@@ -3,21 +3,17 @@ import styles from "./Button.module.css"
 import Spinner from "../Spinner/Spinner"
 
 function Button({ text, variant = "secondary", className, loading, type, ...rest}) {
-        const primary = styles.primary
-        const secondary = styles.secondary
-        const ghost = styles.ghost
-        const destructive = styles.destructive
 
-        let buttonVariant = secondary
+        let buttonVariant = "secondary"
 
         if (variant === "primary") {
-                buttonVariant = primary
+                buttonVariant = styles.primary
         } else if (variant === "secondary") {
-                buttonVariant = secondary
+                buttonVariant = styles.secondary
         } else if (variant === "ghost") {
-                buttonVariant = ghost
+                buttonVariant = styles.ghost
         } else if (variant === "destructive") {
-                buttonVariant = destructive
+                buttonVariant = styles.destructive
         }
 
         const { pending } = useFormStatus()
