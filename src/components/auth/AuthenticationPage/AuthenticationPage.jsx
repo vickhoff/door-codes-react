@@ -60,7 +60,7 @@ function AuthenticationPage({authType}) {
         }
 
         formContent = [
-            { component: TextField, autoFocus: true, label: "Email", type: "email", name: "email", required:true, id: "input-email", placeholder: "Enter your email", error: error.name},
+            { component: TextField, autoFocus: true, label: "Email", type: "email", name: "email", required:true, id: "input-email", placeholder: "Enter your email", error: error.email},
             { component: TextField, label: "Password", type: "password", name: "password", required: true, id: "input-password", placeholder: "Enter your password", error: error.password}
         ]
 

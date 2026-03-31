@@ -2,7 +2,7 @@ import { useFormStatus } from "react-dom"
 import styles from "./Button.module.css"
 import Spinner from "../Spinner/Spinner"
 
-function Button({ text, variant = "secondary", className, loading, ...rest}) {
+function Button({ text, variant = "secondary", className, loading, type, ...rest}) {
         const primary = styles.primary
         const secondary = styles.secondary
         const ghost = styles.ghost
@@ -21,12 +21,13 @@ function Button({ text, variant = "secondary", className, loading, ...rest}) {
         }
 
         const { pending } = useFormStatus()
+        const isSubmit = type !== "button"  
 
         return <button
-                        className={`${pending || loading ? styles.loading : ""} ${styles.button} ${buttonVariant} ${className ?? ""} ${pending}`}
+        type={type} className={`${isSubmit && pending || loading ? styles.loading : ""} ${styles.button} ${buttonVariant} ${className ?? ""} ${pending}` }
                         disabled={pending} {...rest}
                 >
-                        {pending || loading ? <Spinner variant={"inverted"} />: ""}{text}
+                        {isSubmit && pending || loading ? <Spinner variant={buttonVariant === destructive ? "accent" : "inverted"} />: ""}{text}
                 </button>
 }
 

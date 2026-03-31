@@ -14,12 +14,13 @@ function AddModal({onClose}) {
         code: null,
         address: null
     })
-    const [addIsLoading, setAddIsLoading] = useState(true) 
+    const [addIsLoading, setAddIsLoading] = useState(false) 
 
     async function handleAddForm(codeData) {
         const formData = Object.fromEntries(codeData)
  
         try {
+            setAddIsLoading(true)
             await addCodeItem(formData)
             onClose()
         } catch(error) {
@@ -36,7 +37,7 @@ function AddModal({onClose}) {
     ]
 
     const buttons = [
-        {variant: "ghost", text: "Cancel", onClick: onClose},
+        {variant: "ghost", text: "Cancel", type: "button", onClick: onClose},
         {variant: "primary", text: "Add code"}
     ]
     

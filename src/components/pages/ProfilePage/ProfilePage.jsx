@@ -23,7 +23,7 @@ function ProfilePage() {
     return (
         <section className={styles.section}>
             <PageHeader title={`Welcome ${user.name}`} message={"What code did you forget today?"}/>
-            <CodeList onAddCode={() => setShowAddModal(true)} onEditCode={handleEditCode} setId={setClickedItemId} />
+            <CodeList onAddCode={() => setShowAddModal(true)} onEditCode={handleEditCode} />
             {showAddModal && createPortal(
                 <AddModal onClose={() => setShowAddModal(false)} />,
                 document.body
