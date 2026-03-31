@@ -14,10 +14,11 @@ function AddModal({onClose}) {
         code: null,
         address: null
     })
+    const [addIsLoading, setAddIsLoading] = useState(true) 
 
     async function handleAddForm(codeData) {
         const formData = Object.fromEntries(codeData)
-        const [addIsLoading, setAddIsLoading] = useState(true)  
+ 
         try {
             await addCodeItem(formData)
             onClose()
