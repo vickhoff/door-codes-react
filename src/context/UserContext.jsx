@@ -76,8 +76,8 @@ export function UserProvider({ children }) {
         }
 
 
-        // const { data: savedItem } = await response.json()
-        // setData(prev => prev.map(codeItem => codeItem._id === id ? savedItem : codeItem))
+        const { data: deletedItem } = await response.json()
+        setData(prev => prev.filter(codeItem => codeItem._id === id ? deletedItem : codeItem))
     }
 
     return (

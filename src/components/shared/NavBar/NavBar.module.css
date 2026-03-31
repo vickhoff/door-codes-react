@@ -1,0 +1,32 @@
+.nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+
+    li {
+        list-style-type: none;
+    }
+
+    a {
+        text-decoration: none;
+        opacity: 0.6;
+    }
+
+    .dark {
+        color: var(--color-foreground-inverted)
+    }
+
+    .light {
+        color: var(--color-foreground-default)
+    }
+
+    a:hover {
+        opacity: 1;
+        transition: all ease-out 0.2s;
+    }
+
+    :global(.active) {                                                                   
+        opacity: 1; 
+    }
+}
+
