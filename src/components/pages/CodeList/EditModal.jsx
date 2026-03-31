@@ -11,6 +11,7 @@ function EditModal({onClose, id}) {
     const{updateCodeItem, deleteCodeItem} = useUser()
     const { data: code, isLoading: codeIsLoading } = useFetchAPI(`/api/items/${id}`, null)
     const[isLoadingUpdate, setIsLoadingUpdate] = useState(true)
+    const[isLoadingDelete, setIsLoadingDelete] = useState(false)
 
     const [errors, setErrors] = useState({
         name: null,
@@ -32,14 +33,14 @@ function EditModal({onClose, id}) {
     }
 
     async function handleDelete() {
-        setIsLoadingUpdate(true)
+        setIsLoadingDelete(true)
         try {
             await deleteCodeItem(id)
             onClose()
         } catch(error) {
             console.error(error)
         } finally {
-            setIsLoadingUpdate(false)
+            setIsLoadingDelete(false)
         }
     }
 
@@ -50,7 +51,7 @@ function EditModal({onClose, id}) {
     ]
 
     const buttons = [
-        {variant: "destructive", text: "Delete", type: "button", onClick:handleDelete },
+        {variant: "destructive", text: "Delete", type: "button", loading: isLoadingDelete, onClick:handleDelete },
         {variant: "ghost", text: "Cancel", onClick: onClose},
         {variant: "primary", text: "Save"}
     ]

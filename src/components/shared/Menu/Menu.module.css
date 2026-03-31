@@ -1,0 +1,45 @@
+.linkGroup {
+    display: flex;
+    gap: 16px;
+}
+
+.linkGroup a,
+.linkGroup button {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: text-underline-offset 0.2s ease-in-out;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.linkGroup a:hover,
+.linkGroup button:hover {
+    text-underline-offset: 2px;
+}
+
+.menu {
+    padding-block-start: 32px;
+    display: flex;
+    justify-content:space-between;
+}
+
+.logo {
+    height: 24px;
+    width: auto;
+}
+
+.menu a {
+    opacity: 0.6;
+}
+
+.light {
+    color: var(--color-foreground-default)
+}
+
+.dark {
+    color: var(--color-foreground-inverted)
+}
+
+
+

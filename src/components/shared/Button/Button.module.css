@@ -13,6 +13,10 @@
     font-family: inherit;
     cursor: pointer;
   }
+  
+  .button span{
+    position: absolute;
+  }
 
   .primary {
     background-color: var(--color-surface-accent);
@@ -70,3 +74,7 @@
   button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
   }
+
+  .button.loading {
+    color: transparent;
+}

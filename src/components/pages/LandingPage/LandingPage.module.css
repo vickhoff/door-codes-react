@@ -4,24 +4,12 @@
     padding-inline: 24px;
 }
 
-.landingMenu {
-    padding-block-start: 32px;
-    padding-inline: 24px;
-    display: flex;
-    justify-content:space-between;
-}
-
 .hero {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 40px;
     padding-block: 60px;
-}
-
-.logo {
-    height: 24px;
-    width: auto;
 }
 
 .title {
@@ -35,11 +23,6 @@
 }
 
 .buttonGroup {
-    display: flex;
-    gap: 16px;
-}
-
-.linkGroup {
     display: flex;
     gap: 16px;
 }

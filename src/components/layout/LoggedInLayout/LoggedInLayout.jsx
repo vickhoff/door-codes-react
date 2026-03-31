@@ -1,13 +1,17 @@
 import { Outlet } from "react-router-dom"
 import NavBar from "../../shared/NavBar/NavBar"
 import styles from "./LoggedInLayout.module.css"
+import { useAuth } from "../../../context/AuthContext"
+import Menu from "../../shared/Menu/Menu"
+import { Link } from "react-router-dom"
 
 function LoggedInLayout() {
 
+    const{ logout } = useAuth()
+
     const pages = [
         {title: "Codes", url: "/me"},
-        {title: "User settings", url: "/settings"},
-        {title: "Log out", url: ""}
+        {title: "User settings", url: "/settings"}
     ]
 
     return (
@@ -15,7 +19,9 @@ function LoggedInLayout() {
         <div className={styles.container}>
             <div className={styles.layout}></div>
             <header className={styles.loggedInMenu}>
-                <NavBar pages={pages} theme={"dark"}/>
+                <Menu pages={pages} theme={"dark"}>
+                    <button onClick={logout}>Log out</button>
+                </Menu>
             </header>
             <main className={styles.loggedInMain}>
                 <Outlet />

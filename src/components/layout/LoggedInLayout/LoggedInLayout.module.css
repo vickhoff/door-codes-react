@@ -22,7 +22,6 @@
     max-width: 800px;
     margin-inline: auto;
     color: var(--color-foreground-inverted);
-    padding-block-start: 24px;
     margin-block-end: 94px;
     padding-inline: 24px;
 }

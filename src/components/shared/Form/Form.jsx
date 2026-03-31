@@ -31,7 +31,7 @@ export default function Form({fields, buttons, handleSubmit, generalError, isLoa
             { generalError && <p className={styles.generalFormError}>{generalError}</p> }
 
             <div className={styles.buttonWrapper}>
-                {destructiveButton.length > 0 && destructiveButton.map(button => <Button key={button.text} variant={button.variant} type={button.type} text={button.text} onClick={button.onClick} />)}
+                {destructiveButton.length > 0 && destructiveButton.map(button => <Button key={button.text} variant={button.variant} type={button.type} text={button.text} loading={button.loading} onClick={button.onClick} />)}
                 <div className={styles.buttonContainer}>
                     {nonDestructiveButtons.map(button => (
                         <Button key={button.text} className={buttons.length === 1 ? styles.fullWidthSubmit : ""} variant={button.variant} type={button.type} text={button.text} onClick={button.onClick} />

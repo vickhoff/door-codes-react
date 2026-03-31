@@ -5,6 +5,7 @@ import Hero2 from "../../../assets/images/hero-2.png"
 import styles from "./LandingPage.module.css"
 import NavBar from "../../shared/NavBar/NavBar"
 import { Link } from "react-router"
+import Menu from "../../shared/Menu/Menu"
 
 function LandingPage() {
 
@@ -16,22 +17,19 @@ function LandingPage() {
     ]
 
     return (
-            <>
-            <header className={styles.landingMenu}>                
-                <img className={styles.logo} src={LogoBlack} alt="GetIn logotype" />
-                <NavBar theme={"light"} pages={pages} />
-                <div className={styles.linkGroup}>
-                    <Link to="/login">Login</Link>
-                    <Link to="/signup">Signup</Link>
-                </div>
-            </header>
+        <>
+
+            
             <div className={styles.wrapper}>
+            <Menu pages={pages} theme={"light"}>
+                <Link to="/login">Login</Link>
+            </Menu>
             <section className={styles.hero}>
                 <div className={styles.titleGroup}>
                     <h1 className={styles.title}>When you need the code - Right now</h1>
                     <p>Do you also keep forgetting your friends door codes? Never again </p>
                 </div>
-                    <ButtonLink path={"/signup"} variant="primary" text="Request a demo"/> 
+                    <ButtonLink path={"/signup"} variant="primary" text="Create an account"/> 
             </section>
             <section className={styles.imgContainer}>
                 <img src={Hero1} alt="Man asking friend for door code" />

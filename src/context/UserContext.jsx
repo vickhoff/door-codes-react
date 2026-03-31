@@ -17,7 +17,7 @@ export function UserProvider({ children }) {
     const codesWithDistance = useMemo(() =>
         data.map(codeItem => ({ ...codeItem, distance: randomDistance() }))
         , [data])
-
+    
     const codes = useMemo(() => {
         const closest = Math.min(...codesWithDistance.map(c => c.distance))
         return codesWithDistance.map(codeItem => ({
