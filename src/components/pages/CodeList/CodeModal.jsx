@@ -20,32 +20,33 @@ function CodeModal({onClose, mode, codeId}) {
         code: null,
         address: null
     })
-    const [isLoading, setIsLoading] = useState(false) 
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isDeleting, setIsDeleting] = useState(false)
 
     async function handleSubmit(codeData) {
         const formData = Object.fromEntries(codeData)
- 
+
         try {
-            setIsLoading(true)
-            if (mode === "add") await addCodeItem(formData)        
+            setIsSubmitting(true)
+            if (mode === "add") await addCodeItem(formData)
             if (mode === "edit") await updateCodeItem(formData, codeId)
             onClose()
         } catch(error) {
             console.error(error)
         } finally {
-            setIsLoading(false)
+            setIsSubmitting(false)
         }
     }
 
     async function handleDelete() {
-        setIsLoading(true)
+        setIsDeleting(true)
         try {
             await deleteCodeItem(codeId)
             onClose()
         } catch(error) {
             console.error(error)
         } finally {
-            setIsLoading(false)
+            setIsDeleting(false)
         }
     }
 
@@ -56,9 +57,9 @@ function CodeModal({onClose, mode, codeId}) {
     ]
 
     const buttonsEdit = [
-        {variant: "destructive", text: "Delete", type: "button", loading: isLoading, onClick:handleDelete },
+        {variant: "destructive", text: "Delete", type: "button", loading: isDeleting, onClick:handleDelete },
         {variant: "ghost", text: "Cancel", type: "button", onClick: onClose},
-        {variant: "primary", text: "Save"}
+        {variant: "primary", text: "Save", loading: isSubmitting}
     ]
 
     const buttonsAdd = [

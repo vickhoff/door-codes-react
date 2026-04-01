@@ -23,7 +23,10 @@ export default function Form({fields, buttons, handleSubmit, generalError, isLoa
 
     return (
 
-        <form className={styles.form} action={handleSubmit}>
+        <form className={styles.form} onSubmit={(event) => {
+            event.preventDefault()
+            handleSubmit(new FormData(event.target))
+        }}>
             {fields.map(({ component: Component, ...field}) => (
                 <Component key={field.name} {...field} onBlur={handleBlur} error={field.error || blurErrors[field.name]} />
             ))}
@@ -34,7 +37,7 @@ export default function Form({fields, buttons, handleSubmit, generalError, isLoa
                 {destructiveButton.length > 0 && destructiveButton.map(button => <Button key={button.text} variant={button.variant} type={"button"} text={button.text} loading={button.loading} onClick={button.onClick} />)}
                 <div className={styles.buttonContainer}>
                     {nonDestructiveButtons.map(button => (
-                        <Button key={button.text} className={buttons.length === 1 ? styles.fullWidthSubmit : ""} variant={button.variant} type={button.type} text={button.text} onClick={button.onClick} />
+                        <Button key={button.text} className={buttons.length === 1 ? styles.fullWidthSubmit : ""} variant={button.variant} type={button.type} text={button.text} loading={button.loading} onClick={button.onClick} />
                     ))}
                 </div>
             </div>

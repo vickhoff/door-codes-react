@@ -16,15 +16,16 @@ function Button({ text, variant = "secondary", className, loading, type, ...rest
                 buttonVariant = styles.destructive
         }
 
-        const { pending } = useFormStatus()
-        const isSubmit = type !== "button"  
-
-        return <button
-        type={type} className={`${isSubmit && pending || loading ? styles.loading : ""} ${styles.button} ${buttonVariant} ${className ?? ""} ${pending}` }
-                        disabled={pending} {...rest}
-                >
-                        {isSubmit && pending || loading ? <Spinner variant={buttonVariant === styles.destructive ? "accent" : "inverted"} />: ""}{text}
-                </button>
+        return (
+                <button
+                type={type}
+                className={`${loading ? styles.loading : ""} ${styles.button} ${buttonVariant} ${className ?? ""}`}
+                disabled={loading}
+                {...rest}
+            >
+                {loading ? <Spinner variant={variant} /> : ""}{text}
+            </button>
+            )
 }
 
 export default Button
