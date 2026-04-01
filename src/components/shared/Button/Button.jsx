@@ -1,4 +1,3 @@
-import { useFormStatus } from "react-dom"
 import styles from "./Button.module.css"
 import Spinner from "../Spinner/Spinner"
 
@@ -14,17 +13,17 @@ function Button({ text, variant = "secondary", className, loading, type, ...rest
                 buttonVariant = styles.ghost
         } else if (variant === "destructive") {
                 buttonVariant = styles.destructive
-        }
+        } 
 
         return (
                 <button
-                type={type}
-                className={`${loading ? styles.loading : ""} ${styles.button} ${buttonVariant} ${className ?? ""}`}
-                disabled={loading}
-                {...rest}
-            >
-                {loading ? <Spinner variant={variant} /> : ""}{text}
-            </button>
+                    type={type}
+                    className={`${loading ? styles.loading : ""} ${styles.button} ${buttonVariant} ${className ?? ""}`}
+                    disabled={loading}
+                    {...rest}
+                >
+                    {loading ? <Spinner variant={variant} /> : ""}{text}
+                </button>
             )
 }
 

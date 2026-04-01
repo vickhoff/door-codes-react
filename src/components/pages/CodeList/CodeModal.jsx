@@ -64,7 +64,7 @@ function CodeModal({onClose, mode, codeId}) {
 
     const buttonsAdd = [
         {variant: "ghost", text: "Cancel", type: "button", onClick: onClose},
-        {variant: "primary", text: "Add code"}
+        {variant: "primary", text: "Add code", loading: isSubmitting}
     ]
     
     return (
