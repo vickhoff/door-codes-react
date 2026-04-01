@@ -31,7 +31,6 @@ async function updateCode(codeData, id) {
 }
 
 async function deleteCode(id) {
-    console.log(id)
     const response = await fetch(`/api/items/delete/${id}`, {
         method: "DELETE",
         credentials: "include",

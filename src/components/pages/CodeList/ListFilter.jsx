@@ -9,8 +9,8 @@ function ListFilter({onAddCode}) {
 
     return (
         <div className={styles.container}>
-            <button onClick={() => setSortByDistance(true)} className={`${styles.filterButton} ${sortByDistance ? styles.active : ""}`}>Codes near you</button>
-            <button onClick={() => setSortByDistance(false)} className={`${styles.filterButton} ${!sortByDistance ? styles.active : ""}`}>All your codes</button>
+            <button aria-pressed={sortByDistance}    onClick={() => setSortByDistance(true)} className={`${styles.filterButton} ${sortByDistance ? styles.active : ""}`}>Codes near you</button>
+            <button aria-pressed={!sortByDistance} onClick={() => setSortByDistance(false)} className={`${styles.filterButton} ${!sortByDistance ? styles.active : ""}`}>All your codes</button>
             <Button onClick={onAddCode} text="Add a code" variant="primary"/>
         </div>
     )

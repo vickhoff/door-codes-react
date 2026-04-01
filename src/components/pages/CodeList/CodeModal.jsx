@@ -13,6 +13,7 @@ function CodeModal({onClose, mode, codeId}) {
 
     const { addCodeItem, updateCodeItem, deleteCodeItem } = useUser()
 
+    const [confirmDelete, setConfirmDelete] = useState(false)
 
     const [errors, setErrors] = useState({
         name: null,

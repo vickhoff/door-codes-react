@@ -14,7 +14,6 @@ export async function loginUser(userData) {
             const error = await response.json()
             throw new Error(error.message)
         }
-        console.log("You logged in!")
         return response.json()
 }
 
@@ -32,7 +31,5 @@ export async function registerUser(userData) {
                     const error = await response.json()
                     throw new Error(error.message || "Something went wrong")
                 }
-
-                console.log("You signed up!")
                 return response.json()
 }
