@@ -12,15 +12,13 @@ import { Link } from "react-router-dom"
 function AuthenticationPage({authType}) {
 
     const navigate = useNavigate();
-    const {setUserData, refreshUser} = useAuth()
-    const {user} = useAuth()
+    const {setUserData, fetchUser, user } = useAuth()
     const [error, setError] = useState({})
 
     async function handleLoginForm(loginData) {
         const formData = Object.fromEntries(loginData);
         try {
             await loginUser(formData)
-            await refreshUser()
             navigate("/me")
         } catch(error) {
             setError({general: error.message})
@@ -31,7 +29,6 @@ function AuthenticationPage({authType}) {
         const newUserData = Object.fromEntries(signupData);
         try {
             await registerUser(newUserData)
-            await refreshUser()
             navigate("/me")
         } catch (error) {
             if (error.message.toLowerCase().includes("name")) {

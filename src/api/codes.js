@@ -9,7 +9,7 @@ async function createCode(codeData) {
         body: JSON.stringify(codeData),
     })
 
-        if (!res.ok) throw new Error("Failed to add code")
+        if (!response.ok) throw new Error("Failed to add code")
 
     return response.json()
 }
