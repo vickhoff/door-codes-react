@@ -45,8 +45,10 @@ export function UserProvider({ children }) {
         setData(prev => prev.filter(codeItem => codeItem._id === id ? deletedItem : codeItem))
     }
 
+    const[navIsVisible, setNavIsVisible] = useState(false)
+
     return (
-        <UserContext.Provider value={{ codes, isLoadingCodes, sortByDistance, setSortByDistance, addCodeItem, updateCodeItem, deleteCodeItem }}>
+        <UserContext.Provider value={{ codes, navIsVisible, isLoadingCodes, sortByDistance, setSortByDistance, addCodeItem, updateCodeItem, deleteCodeItem }}>
             {children}
         </UserContext.Provider>
     )

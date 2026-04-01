@@ -30,3 +30,11 @@
     }
 }
 
+@media (width <= 650px) {
+    .nav ul {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+}
+

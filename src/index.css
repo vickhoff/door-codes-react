@@ -52,12 +52,6 @@
 a {
   font-weight: 500;
   color: var(--color-foreground-default);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  transition: text-underline-offset 0.2s ease-in-out;
-}
-a:hover {
-  text-underline-offset: 2px;
 }
 
 body {
