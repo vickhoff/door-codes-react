@@ -1,13 +1,11 @@
 import { Outlet } from "react-router-dom"
-import NavBar from "../../shared/NavBar/NavBar"
 import styles from "./LoggedInLayout.module.css"
 import { useAuth } from "../../../context/AuthContext"
 import Menu from "../../shared/Menu/Menu"
-import { Link } from "react-router-dom"
 
 function LoggedInLayout() {
 
-    const{ logout } = useAuth()
+    const { logout } = useAuth()
 
     const pages = [
         {title: "Codes", url: "/me"},
