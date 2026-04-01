@@ -64,7 +64,7 @@ function AuthenticationPage({authType}) {
             { component: TextField, label: "Password", type: "password", name: "password", required: true, id: "input-password", placeholder: "Enter your password", error: error.password}
         ]
 
-        buttons = [{variant: "primary", text: "Login", onClick: handleLoginForm}]
+        buttons = [{variant: "primary", text: "Login"}]
         
         formSubmit = handleLoginForm
 
