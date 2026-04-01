@@ -1,0 +1,13 @@
+.chatBubble {
+    padding-inline: 12px;
+    padding-block: 6px;
+    border-radius: 99px;
+}
+
+.green {
+    background-color: #BCCF84;
+}
+
+.yellow {
+    background-color: #EFDBC4;
+}

@@ -6,6 +6,7 @@ import styles from "./LandingPage.module.css"
 import NavBar from "../../shared/NavBar/NavBar"
 import { Link } from "react-router"
 import Menu from "../../shared/Menu/Menu"
+import ChatBubble from "./ChatBubble/ChatBubble"
 
 function LandingPage() {
 
@@ -31,9 +32,21 @@ function LandingPage() {
                 </div>
                     <ButtonLink path={"/signup"} variant="primary" text="Create an account"/> 
             </section>
-            <section className={styles.imgContainer}>
-                <img src={Hero1} alt="Man asking friend for door code" />
-                <img src={Hero2} alt="Woman asking friend for door code" />
+            <section className={styles.heroContainer}>
+                <div className={styles.imgContainer}>
+                    <div className={styles.chatGroup}>
+                        <ChatBubble color={"green"} text={"Oh shit, forgot the code again 🤬"}/>
+                        <ChatBubble color={"green"} text={"Should be an app for this..."}/>
+                    </div>
+                    <img src={Hero1} alt="Man asking friend for door code" />
+                </div>
+                <div className={styles.imgContainer}>
+                <div className={styles.chatGroup}>
+                        <ChatBubble color={"yellow"} text={"I’m here now"}/>
+                        <ChatBubble color={"yellow"} text={"what’s the code again 😣"}/>
+                    </div>
+                    <img src={Hero2} alt="Woman asking friend for door code" />
+                </div>
             </section>
         </div>
         </>
