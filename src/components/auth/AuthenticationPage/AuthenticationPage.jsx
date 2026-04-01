@@ -59,6 +59,7 @@ function AuthenticationPage({authType}) {
         const formData = Object.fromEntries(loginData);
         try {
             await loginUser(formData)
+            await fetchUser()
             navigate("/me")
         } catch(error) {
             setError({general: error.message})

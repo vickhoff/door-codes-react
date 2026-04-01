@@ -1,5 +1,5 @@
 import styles from "./Modal.module.css"
-import closeIcon from "../../../assets/images/close-icon.svg"
+import closeIcon from "../../../assets/images/close-icon-black.svg"
 
 
 function Modal({onClose, title, children}) {

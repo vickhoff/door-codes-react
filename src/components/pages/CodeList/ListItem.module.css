@@ -34,3 +34,17 @@
     justify-content: center;
 }
 
+@media (width <= 400px) {
+    .rowContainer {
+        padding-inline: 16px
+    }
+
+    .innerContainer {
+        padding-block: 12px;
+    }
+
+    .code {
+        font-size: 1.6rem;
+    }
+}
+

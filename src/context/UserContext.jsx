@@ -42,7 +42,7 @@ export function UserProvider({ children }) {
 
     async function deleteCodeItem(id) {
         const { data: deletedItem } = await deleteCode(id)
-        setData(prev => prev.filter(codeItem => codeItem._id === id ? deletedItem : codeItem))
+        setData(prev => prev.filter(codeItem => codeItem._id !== id))
     }
 
     return (

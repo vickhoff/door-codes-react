@@ -1,27 +1,51 @@
+@keyframes menuAnimation {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
 .linkGroup {
     display: flex;
     gap: 16px;
 }
 
-.linkGroup a,
 .linkGroup button {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: text-underline-offset 0.2s ease-in-out;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    opacity: 0.6;
+    transition: 0.2s ease-in-out all;
 }
 
 .linkGroup a:hover,
 .linkGroup button:hover {
-    text-underline-offset: 2px;
+    opacity: 1;
+}
+
+.linkGroup::before {
+    content: "";
+    width: 1px;
+    height:100%;
+
+}
+
+.light .linkGroup::before {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dark .linkGroup::before {
+    background-color: rgba(255, 255, 255, 0.3)
 }
 
 .menu {
     padding-block-start: 32px;
     display: flex;
     justify-content:space-between;
+    align-items: center;
+}
+
+.navContainer {
+    display: flex;
+    gap: 16px;
 }
 
 .logo {
@@ -31,14 +55,94 @@
 
 .menu a {
     opacity: 0.6;
+    text-decoration: none;
+    transition: 0.2s ease-in-out all;
 }
 
+.menu a:hover {
+    opacity: 1;
+}
 .light {
     color: var(--color-foreground-default)
 }
 
 .dark {
     color: var(--color-foreground-inverted)
+}
+
+.hamburger {
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.mobileNav {
+    padding-block-start: 40px;
+    display: none;
+    position: absolute;
+    z-index: 10;
+    background-color: rgba(255,255,255,0.3);
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--type-serif);
+    font-size: 3rem;
+    gap: 94px;
+    padding-bottom: 56px;
+}
+
+.mobileNav.dark {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.hamburgerLogout {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.mobileNav button {
+    font-family: var(--type-sans);
+    text-transform: uppercase;
+    font-size: 1rem;
+    border: none;
+    background: transparent;
+}
+
+.mobileNav .nav {
+    z-index: 20;
+}
+
+@media (width <= 650px) {
+    .linkGroup {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 0;
+    }
+
+    .navContainer {
+        display: none
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+
+.visible {
+    display: flex;
+    animation-name: menuAnimation;
+    animation-duration: 0.3s;
 }
 
 

@@ -22,3 +22,10 @@
     gap: 16px;
     text-align: center;
 }
+
+@media (width <= 400px) {
+    .listContainer {
+        padding-inline: 8px;
+        padding-block: 8px;
+    }
+}
