@@ -4,7 +4,7 @@ import Tag from "../../shared/Tag/Tag"
 function ListItem({name, code, distance, isClosest, onClick, id}) {
 
     return (
-        <div className={styles.rowContainer} onClick={() => onClick(id)}>
+        <button className={styles.rowContainer} onClick={() => onClick(id)}>
             <div className={styles.innerContainer}>
                 <div>
                     <p>{name}</p>
@@ -15,8 +15,8 @@ function ListItem({name, code, distance, isClosest, onClick, id}) {
                     <span>{distance} km</span>
                 </div>
             </div>
-        </div>
-    )   
+        </button>
+    )
 }
 
 export default ListItem

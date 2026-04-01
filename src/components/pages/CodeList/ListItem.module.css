@@ -1,10 +1,17 @@
 .rowContainer {
     display: flex;
+    width: 100%;
     font-weight: 500;
     padding-inline: 24px;
     cursor: pointer;
     transition: 0.2s ease-in-out all;
     border-radius: 8px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
 }
 
 .innerContainer {
