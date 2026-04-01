@@ -1,0 +1,84 @@
+import Modal from "../../shared/Modal/Modal"
+import Form from "../../shared/Form/Form"
+import { TextField } from "../../shared/Input/TextField"
+import { useState } from "react"
+import { useUser } from "../../../context/UserContext"
+import { useFetchAPI } from "../../../hooks/useFetchAPI"
+
+
+
+function CodeModal({onClose, mode, codeId}) {
+    //const { data: code, isLoading: codeIsLoading } = useFetchAPI(mode === "edit" ? `/api/items/${codeId}` : null, null)
+    const { data: code, isLoading: codeIsLoading } = useFetchAPI(`/api/items/${codeId}`, null)
+
+    const { addCodeItem, updateCodeItem, deleteCodeItem } = useUser()
+
+
+    const [errors, setErrors] = useState({
+        name: null,
+        code: null,
+        address: null
+    })
+    const [isLoading, setIsLoading] = useState(false) 
+
+    async function handleSubmit(codeData) {
+        const formData = Object.fromEntries(codeData)
+ 
+        try {
+            setIsLoading(true)
+            if (mode === "add") await addCodeItem(formData)        
+            if (mode === "edit") await updateCodeItem(formData, codeId)
+            onClose()
+        } catch(error) {
+            console.error(error)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    async function handleDelete() {
+        setIsLoading(true)
+        try {
+            await deleteCodeItem(codeId)
+            onClose()
+        } catch(error) {
+            console.error(error)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const formContent = [
+        { component: TextField, autoFocus: true, label: "Code title", placeholder:"My friends place", name: "name", required:true, id: "input-title", error: errors.name, defaultValue: mode === "edit" ? code?.name : undefined},
+        { component: TextField, label: "Address", placeholder:"My friends address", name: "address", required: true, id: "input-address", error: errors.address, defaultValue: mode === "edit" ? code?.address : undefined},
+        { component: TextField, label: "Code", placeholder:"The door code", name: "code", required: true, id: "input-", error: errors.code, defaultValue: mode === "edit" ? code?.code : undefined}
+    ]
+
+    const buttonsEdit = [
+        {variant: "destructive", text: "Delete", type: "button", loading: isLoading, onClick:handleDelete },
+        {variant: "ghost", text: "Cancel", type: "button", onClick: onClose},
+        {variant: "primary", text: "Save"}
+    ]
+
+    const buttonsAdd = [
+        {variant: "ghost", text: "Cancel", type: "button", onClick: onClose},
+        {variant: "primary", text: "Add code"}
+    ]
+    
+    return (
+        <Modal 
+            title={mode === "edit" ? "Edit code" : "Add code"}
+            onClose={onClose}
+        >
+
+            <Form 
+                fields={formContent} 
+                handleSubmit={handleSubmit} 
+                isLoading={mode === "edit" && codeIsLoading}   
+                buttons={mode === "edit" ? buttonsEdit : buttonsAdd}
+            />
+        </Modal>
+    )
+}
+
+export default CodeModal
