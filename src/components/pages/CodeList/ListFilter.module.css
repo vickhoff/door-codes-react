@@ -9,7 +9,7 @@
 }
 
 .filterButton {
-    flex: 1;
+    flex: 1 32px;
     border-radius: 8px;
     box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.10);
     background-color: transparent;
@@ -31,4 +31,10 @@
 
 .active:hover {
     background-color: white;
+}
+
+@media (width <=400px) {
+    .container{
+        flex-direction: column;
+    }
 }
