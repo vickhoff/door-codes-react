@@ -4,8 +4,7 @@ import CodeList from "../CodeList/CodeList"
 import PageHeader from "../../shared/PageHeader/PageHeader"
 import styles from "./ProfilePage.module.css"
 import { createPortal } from 'react-dom'
-import AddModal from "../CodeList/AddModal"
-import EditModal from "../CodeList/EditModal"
+import CodeModal from "../CodeList/CodeModal"
 
 
 function ProfilePage() {
@@ -25,11 +24,11 @@ function ProfilePage() {
             <PageHeader title={`Welcome ${user.name}`} message={"What code did you forget today?"}/>
             <CodeList onAddCode={() => setShowAddModal(true)} onEditCode={handleEditCode} />
             {showAddModal && createPortal(
-                <AddModal onClose={() => setShowAddModal(false)} />,
+                <CodeModal mode="add" onClose={() => setShowAddModal(false)} />,
                 document.body
             )}
             {showEditModal && createPortal(
-                <EditModal id={clickedItemId} onClose={() => setShowEditModal(false)} />,
+                <CodeModal mode="edit" codeId={clickedItemId} onClose={() => setShowEditModal(false)} />,
                 document.body
             )}
         </section>

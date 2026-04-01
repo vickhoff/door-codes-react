@@ -3,6 +3,7 @@ import {useState, useEffect} from "react"
 export function useFetchAPI(url, initialValue) {
     const[data, setData] = useState(initialValue)
     const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(null)
 
     async function fetchData() {
         try {
@@ -18,15 +19,16 @@ export function useFetchAPI(url, initialValue) {
             const result = await response.json()
             setData(result)
         } catch(error) {
-            console.error(`Failed to fetch from ${url}`)
+            setError(error.message)
         } finally {
             setIsLoading(false)
         }
     }
 
     useEffect(() => {
+        if (!url) return
         fetchData()
     },[])
 
-    return { data, isLoading, setData }
+    return { data, isLoading, error, setData }
 }
