@@ -9,32 +9,6 @@ import { useState, useEffect, useRef } from "react"
 import { loginUser, registerUser } from "../../../api/auth"
 import { Link } from "react-router-dom"
 
-async function handleLoginForm(loginData) {
-    const formData = Object.fromEntries(loginData);
-    try {
-        await loginUser(formData)
-        navigate("/me")
-    } catch(error) {
-        setError({general: error.message})
-    }
-}
-
-async function handleSignupForm(signupData) {
-    const newUserData = Object.fromEntries(signupData);
-    try {
-        await registerUser(newUserData)
-        navigate("/me")
-    } catch (error) {
-        if (error.message.toLowerCase().includes("name")) {
-            setError(prev => ({ ...prev, name: "Name already exists" }))
-        } else if (error.message.toLowerCase().includes("email")) {
-            setError(prev => ({ ...prev, email: "Email already exists"}))
-        } else {
-            setError(prev => ({ ...prev, password: error.message }))
-        }
-    }
-}
-
 function AuthenticationPage({authType}) {
 
     const navigate = useNavigate();
@@ -78,6 +52,32 @@ function AuthenticationPage({authType}) {
             formSubmit: handleSignupForm,
             submitText: "Signup",
             formLink: <>Already have an account? <Link to="/login">Login here</Link></>
+        }
+    }
+
+    async function handleLoginForm(loginData) {
+        const formData = Object.fromEntries(loginData);
+        try {
+            await loginUser(formData)
+            navigate("/me")
+        } catch(error) {
+            setError({general: error.message})
+        }
+    }
+    
+    async function handleSignupForm(signupData) {
+        const formData = Object.fromEntries(signupData);
+        try {
+            await registerUser(formData)
+            navigate("/me")
+        } catch (error) {
+            if (error.message.toLowerCase().includes("name")) {
+                setError(prev => ({ ...prev, name: "Name already exists" }))
+            } else if (error.message.toLowerCase().includes("email")) {
+                setError(prev => ({ ...prev, email: "Email already exists"}))
+            } else {
+                setError(prev => ({ ...prev, password: error.message }))
+            }
         }
     }
 
