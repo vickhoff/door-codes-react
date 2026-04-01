@@ -9,94 +9,79 @@ import { useState, useEffect, useRef } from "react"
 import { loginUser, registerUser } from "../../../api/auth"
 import { Link } from "react-router-dom"
 
+async function handleLoginForm(loginData) {
+    const formData = Object.fromEntries(loginData);
+    try {
+        await loginUser(formData)
+        navigate("/me")
+    } catch(error) {
+        setError({general: error.message})
+    }
+}
+
+async function handleSignupForm(signupData) {
+    const newUserData = Object.fromEntries(signupData);
+    try {
+        await registerUser(newUserData)
+        navigate("/me")
+    } catch (error) {
+        if (error.message.toLowerCase().includes("name")) {
+            setError(prev => ({ ...prev, name: "Name already exists" }))
+        } else if (error.message.toLowerCase().includes("email")) {
+            setError(prev => ({ ...prev, email: "Email already exists"}))
+        } else {
+            setError(prev => ({ ...prev, password: error.message }))
+        }
+    }
+}
+
 function AuthenticationPage({authType}) {
 
     const navigate = useNavigate();
     const {setUserData, fetchUser, user } = useAuth()
     const [error, setError] = useState({})
 
-    async function handleLoginForm(loginData) {
-        const formData = Object.fromEntries(loginData);
-        try {
-            await loginUser(formData)
-            navigate("/me")
-        } catch(error) {
-            setError({general: error.message})
-        }
-    }
-
-    async function handleSignupForm(signupData) {
-        const newUserData = Object.fromEntries(signupData);
-        try {
-            await registerUser(newUserData)
-            navigate("/me")
-        } catch (error) {
-            if (error.message.toLowerCase().includes("name")) {
-                setError(prev => ({ ...prev, name: "Name already exists" }))
-            } else if (error.message.toLowerCase().includes("email")) {
-                setError(prev => ({ ...prev, email: "Email already exists"}))
-            } else {
-                setError(prev => ({ ...prev, password: error.message }))
-            }
-        }
-    }
-
-    let heroClassName, heroMessage, formMessage, formContent, formSubmit, formLink, submitText, buttons
-
-    if (authType === "login") {
-        heroClassName = styles.login
-
-        heroMessage = {
+    const AUTH_CONFIG = {
+        login: {
+            heroClassName: styles.login,
+            heroMessage: {
                 title: "Hope you at least get in here",
                 message: "Kidding, you probably have another app to remember the credentials for this site." 
-            }
-
-        formMessage = {
-            title:"Welcome back!",
-            message:"Add your credentials"
+            },
+            formMessage: {
+                title:"Welcome back!",
+                message:"Add your credentials"
+            },
+            formContent: [
+                { component: TextField, autoFocus: true, label: "Email", type: "email", name: "email", required:true, id: "input-email", placeholder: "Enter your email", error: error.email},
+                { component: TextField, label: "Password", type: "password", name: "password", required: true, id: "input-password", placeholder: "Enter your password", error: error.password}
+            ],
+            buttons: [{variant: "primary", text: "Login"}],
+            formSubmit: handleLoginForm,
+            submitText: "Login",
+            formLink: <>Not registered? <Link to="/signup">Signup here</Link></>
+        },
+        signup: {
+            heroClassName: styles.signup,
+            heroMessage: {
+                title: "Be prepared to never ask for a forgotten door code again",
+            },
+            formMessage: {
+                title:"Create your account"
+            },
+            formContent: [
+                { component: TextField, autoFocus: true, label: "Name", type: "text", name: "name", required: true, id: "input-name", placeholder: "Enter your name", error: error.name },
+                { component: TextField, label: "Email", type: "email", name: "email", required: true, id: "input-email", placeholder: "Enter your email", error: error.email },
+                { component: TextField, label: "Password", type: "password", name: "password", required:true, id: "input-password", placeholder: "Choose a password", error: error.password }
+            ],
+            buttons: [{variant: "primary", text: "Signup"}],
+            formSubmit: handleSignupForm,
+            submitText: "Signup",
+            formLink: <>Already have an account? <Link to="/login">Login here</Link></>
         }
-
-        formContent = [
-            { component: TextField, autoFocus: true, label: "Email", type: "email", name: "email", required:true, id: "input-email", placeholder: "Enter your email", error: error.email},
-            { component: TextField, label: "Password", type: "password", name: "password", required: true, id: "input-password", placeholder: "Enter your password", error: error.password}
-        ]
-
-        buttons = [{variant: "primary", text: "Login"}]
-        
-        formSubmit = handleLoginForm
-
-        submitText = "Login"
-
-        formLink = <>Not registered? <Link to="/signup">Signup here</Link></>
-    } else if (authType === "signup") {
-        heroClassName = styles.signup
-        
-        heroMessage = {
-            title: "Be prepared to never ask for a forgotten door code again",
-            message: "" 
-        }
-
-        formMessage = {
-            title:"Create your account"
-        }
-        
-        formContent = [
-            { component: TextField, autoFocus: true, label: "Name", type: "text", name: "name", required: true, id: "input-name", placeholder: "Enter your name", error: error.name },
-            { component: TextField, label: "Email", type: "email", name: "email", required: true, id: "input-email", placeholder: "Enter your email", error: error.email },
-            { component: TextField, label: "Password", type: "password", name: "password", required:true, id: "input-password", placeholder: "Choose a password", error: error.password }
-        ]
-
-        buttons = [
-            {variant: "primary", text: "Signup", onClick: handleSignupForm},
-        ]
-
-        formSubmit = handleSignupForm
-
-        submitText = "Signup"
-
-        formLink = <>Already have an account? <Link to="/login">Login here</Link></>
-
     }
+
+    const config = AUTH_CONFIG[authType]
 
     useEffect(() => {
         setError({})
@@ -105,21 +90,21 @@ function AuthenticationPage({authType}) {
     return (
         <main className={styles.authContainer}>
             <Link to="/" className={styles.logoCentered}><img className={`${styles.logo} ${styles.logoMobile}`} src={logoBlack} alt="GetIn logo" /></Link>
-            <section className={`${styles.heroContainer} ${heroClassName}`}>
+            <section className={`${styles.heroContainer} ${config.heroClassName}`}>
                 <Link to="/"><img className={styles.logo} src={logoWhite} alt="GetIn logo" /></Link>
                 
                 <div className={styles.heroMessage}>
-                    <h2 className={styles.heading2}>{heroMessage.title}</h2>
-                    <p>{heroMessage.message}</p>
+                    <h2 className={styles.heading2}>{config.heroMessage.title}</h2>
+                    {config.heroMessage.message && <p>{config.heroMessage.message}</p>}
                 </div>
             </section>
             <section className={styles.formContainer}>
                 <header>
-                    <h2>{formMessage.title}</h2>
-                    {formMessage && <p>{formMessage.message}</p>}
+                    <h2>{config.formMessage.title}</h2>
+                    {config.formMessage.message && <p>{config.formMessage.message}</p>}
                 </header>
-                <Form generalError={error.general} authType={authType} fields={formContent} buttons={buttons} handleSubmit={formSubmit} primaryText={submitText}/>
-                <p>{formLink}</p>
+                <Form generalError={error.general} key={authType} authType={authType} fields={config.formContent} buttons={config.buttons} handleSubmit={config.formSubmit} primaryText={config.submitText}/>
+                <p>{config.formLink}</p>
             </section>
         </main>
     )
