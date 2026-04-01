@@ -23,7 +23,7 @@ function Button({ text, variant = "secondary", className, loading, type, ...rest
         type={type} className={`${isSubmit && pending || loading ? styles.loading : ""} ${styles.button} ${buttonVariant} ${className ?? ""} ${pending}` }
                         disabled={pending} {...rest}
                 >
-                        {isSubmit && pending || loading ? <Spinner variant={buttonVariant === destructive ? "accent" : "inverted"} />: ""}{text}
+                        {isSubmit && pending || loading ? <Spinner variant={buttonVariant === styles.destructive ? "accent" : "inverted"} />: ""}{text}
                 </button>
 }
 
