@@ -42,13 +42,11 @@ export function UserProvider({ children }) {
 
     async function deleteCodeItem(id) {
         const { data: deletedItem } = await deleteCode(id)
-        setData(prev => prev.filter(codeItem => codeItem._id === id ? deletedItem : codeItem))
+        setData(prev => prev.filter(codeItem => codeItem._id !== id))
     }
 
-    const[navIsVisible, setNavIsVisible] = useState(false)
-
     return (
-        <UserContext.Provider value={{ codes, navIsVisible, isLoadingCodes, sortByDistance, setSortByDistance, addCodeItem, updateCodeItem, deleteCodeItem }}>
+        <UserContext.Provider value={{ codes, isLoadingCodes, sortByDistance, setSortByDistance, addCodeItem, updateCodeItem, deleteCodeItem }}>
             {children}
         </UserContext.Provider>
     )

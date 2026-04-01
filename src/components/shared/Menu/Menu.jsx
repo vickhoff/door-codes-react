@@ -25,7 +25,7 @@ function Menu({ theme, pages, children }) {
             <header className={`${styles.menu} ${theme === "light" ? styles.light : styles.dark}`}>
                 <img className={styles.logo} src={theme === "light" ? LogoBlack : LogoWhite} alt="GetIn logotype" />
                 <div className={styles.navContainer}>
-                    <NavBar theme={theme} pages={pages} />
+                    <NavBar setNavIsVisible={setNavIsVisible} theme={theme} pages={pages} />
                 </div>
                 <div className={styles.hamburgerLogout}>
                     <div className={styles.linkGroup}>
