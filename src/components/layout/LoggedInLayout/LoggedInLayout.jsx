@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import styles from "./LoggedInLayout.module.css"
 import { useAuth } from "../../../context/AuthContext"
 import Menu from "../../shared/Menu/Menu"
@@ -6,6 +6,12 @@ import Menu from "../../shared/Menu/Menu"
 function LoggedInLayout() {
 
     const { logout } = useAuth()
+    const navigate = useNavigate()
+
+    async function handleLogout() {
+        await logout()
+        navigate("/login")
+    }
 
     const pages = [
         {title: "Codes", url: "/me"},
@@ -18,7 +24,7 @@ function LoggedInLayout() {
             <div className={styles.layout}></div>
             <header className={styles.loggedInMenu}>
                 <Menu pages={pages} theme={"dark"}>
-                    <button onClick={logout}>Log out</button>
+                    <button onClick={handleLogout}>Log out</button>
                 </Menu>
             </header>
             <main className={styles.loggedInMain}>

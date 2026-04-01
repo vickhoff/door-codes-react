@@ -70,6 +70,7 @@ function AuthenticationPage({authType}) {
         const formData = Object.fromEntries(signupData);
         try {
             await registerUser(formData)
+            await fetchUser()
             navigate("/me")
         } catch (error) {
             if (error.message.toLowerCase().includes("name")) {
