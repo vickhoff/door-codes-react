@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react"
 import { useFetchAPI } from "../hooks/useFetchAPI"
 import { useMemo } from "react"
+import { createCode, updateCode, deleteCode } from "../api/codes"
 
 const UserContext = createContext()
 
@@ -30,54 +31,17 @@ export function UserProvider({ children }) {
     const [sortByDistance, setSortByDistance] = useState(true)
 
     async function addCodeItem(codeData) {
-        const response = await fetch("/api/items/add", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-            body: JSON.stringify(codeData),
-        })
-        if (!response.ok) {
-            const error = await response.json()
-            throw new Error(error.message || "Something went wrong")
-        }
-        const savedItem = await response.json()
-        setData(prev => [...prev, savedItem])
+        const newItem = await createCode(codeData)
+        setData(prev => [...prev, newItem])
     }
 
     async function updateCodeItem(codeData, id) {
-        const response = await fetch(`/api/items/update/${id}`, {
-            method: "PATCH",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-            body: JSON.stringify(codeData),
-        })
-        if (!response.ok) {
-            const error = await response.json()
-            throw new Error(error.message || "Something went wrong")
-        }
-        const { data: savedItem } = await response.json()
+        const { data: savedItem } = await updateCode(codeData, id)
         setData(prev => prev.map(codeItem => codeItem._id === id ? savedItem : codeItem))
     }
 
     async function deleteCodeItem(id) {
-        console.log(id)
-        const response = await fetch(`/api/items/delete/${id}`, {
-            method: "DELETE",
-            credentials: "include",
-        })
-        if (!response.ok) {
-            const error = await response.json()
-            throw new Error(error.message || "Something went wrong")
-        }
-
-
-        const { data: deletedItem } = await response.json()
+        const { data: deletedItem } = await deleteCode(id)
         setData(prev => prev.filter(codeItem => codeItem._id === id ? deletedItem : codeItem))
     }
 
