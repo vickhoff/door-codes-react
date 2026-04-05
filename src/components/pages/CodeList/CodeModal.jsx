@@ -4,16 +4,14 @@ import { TextField } from "../../shared/Input/TextField"
 import { useState } from "react"
 import { useUser } from "../../../context/UserContext"
 import { useFetchAPI } from "../../../hooks/useFetchAPI"
+import autoComplete from "../../../api/address"
 
 
 
 function CodeModal({onClose, mode, codeId}) {
-    //const { data: code, isLoading: codeIsLoading } = useFetchAPI(mode === "edit" ? `/api/items/${codeId}` : null, null)
     const { data: code, isLoading: codeIsLoading } = useFetchAPI(`/api/items/${codeId}`, null)
 
     const { addCodeItem, updateCodeItem, deleteCodeItem } = useUser()
-
-    const [confirmDelete, setConfirmDelete] = useState(false)
 
     const [errors, setErrors] = useState({
         name: null,
@@ -72,7 +70,6 @@ function CodeModal({onClose, mode, codeId}) {
             title={mode === "edit" ? "Edit code" : "Add code"}
             onClose={onClose}
         >
-
             <Form 
                 fields={formContent} 
                 handleSubmit={handleSubmit} 

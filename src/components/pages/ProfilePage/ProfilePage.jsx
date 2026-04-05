@@ -5,6 +5,7 @@ import PageHeader from "../../shared/PageHeader/PageHeader"
 import styles from "./ProfilePage.module.css"
 import { createPortal } from 'react-dom'
 import CodeModal from "../CodeList/CodeModal"
+import AddressField from "../../shared/Input/AddressField"
 
 
 function ProfilePage() {
@@ -22,6 +23,7 @@ function ProfilePage() {
     return (
         <section className={styles.section}>
             <PageHeader title={`Welcome ${user.name}`} message={"What code did you forget today?"}/>
+            <AddressField label="Address" id="address" required={true} disabled={false} />
             <CodeList onAddCode={() => setShowAddModal(true)} onEditCode={handleEditCode} />
             {showAddModal && createPortal(
                 <CodeModal mode="add" onClose={() => setShowAddModal(false)} />,
