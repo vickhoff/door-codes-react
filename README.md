@@ -2,6 +2,8 @@
 
 A web app for storing and managing door codes for places you visit — like friends' apartments, offices, or gyms. Codes are sorted by proximity so the nearest one is always at the top.
 
+Hosted at: [(https://duckduckgo.com)]
+
 ## Background
 
 This was a project built at **Hyper Island** as part of a React course. The goal was to learn React by building a real, full-stack app. The backend — including the REST API and database — was built during a previous course on backend development and APIs, and is reused here as the data layer.
