@@ -2,7 +2,7 @@
 
 A web app for storing and managing door codes for places you visit — like friends' apartments, offices, or gyms. Codes are sorted by proximity so the nearest one is always at the top.
 
-Hosted at: (https://duckduckgo.com)
+Hosted at: https://duckduckgo.com
 
 ## Background
 
