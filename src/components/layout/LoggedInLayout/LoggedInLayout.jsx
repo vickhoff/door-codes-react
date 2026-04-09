@@ -12,11 +12,13 @@ function LoggedInLayout() {
     const [isLoading, setIsLoading] = useState(false)
 
     async function handleLogout() {
-        setIsLoading(true)
-        await logout()
-        setIsLoading(false)
-
-        navigate("/login")
+        try {                      
+            setIsLoading(true)
+            await logout()    
+            navigate("/login")                                                             
+        } finally {           
+            setIsLoading(false)                                                            
+        }  
     }
 
     const pages = [
