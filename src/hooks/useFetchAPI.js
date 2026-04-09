@@ -13,7 +13,7 @@ export function useFetchAPI(url, initialValue) {
 
             if(!response.ok) {
                 const error = await response.json()
-                throw new Error(error.message || "Something went wrong")
+                 throw new Error(error.message || "Something went wrong")
             }
 
             const result = await response.json()

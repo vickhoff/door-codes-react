@@ -4,16 +4,14 @@ import { TextField } from "../../shared/Input/TextField"
 import { useState } from "react"
 import { useUser } from "../../../context/UserContext"
 import { useFetchAPI } from "../../../hooks/useFetchAPI"
+import AddressField from "../../shared/Input/AddressField"
 
 
 
 function CodeModal({onClose, mode, codeId}) {
-    //const { data: code, isLoading: codeIsLoading } = useFetchAPI(mode === "edit" ? `/api/items/${codeId}` : null, null)
     const { data: code, isLoading: codeIsLoading } = useFetchAPI(`/api/items/${codeId}`, null)
 
     const { addCodeItem, updateCodeItem, deleteCodeItem } = useUser()
-
-    const [confirmDelete, setConfirmDelete] = useState(false)
 
     const [errors, setErrors] = useState({
         name: null,
@@ -52,7 +50,7 @@ function CodeModal({onClose, mode, codeId}) {
 
     const formContent = [
         { component: TextField, autoFocus: true, label: "Code title", placeholder:"My friends place", name: "name", required:true, id: "input-title", error: errors.name, defaultValue: mode === "edit" ? code?.name : undefined},
-        { component: TextField, label: "Address", placeholder:"My friends address", name: "address", required: true, id: "input-address", error: errors.address, defaultValue: mode === "edit" ? code?.address : undefined},
+        { component: AddressField, label: "Address", placeholder:"My friends address", name: "address", required: true, id: "input-address", error: errors.address, defaultValue: mode === "edit" ? code?.address : undefined},
         { component: TextField, label: "Code", placeholder:"The door code", name: "code", required: true, id: "input-", error: errors.code, defaultValue: mode === "edit" ? code?.code : undefined}
     ]
 
@@ -72,7 +70,6 @@ function CodeModal({onClose, mode, codeId}) {
             title={mode === "edit" ? "Edit code" : "Add code"}
             onClose={onClose}
         >
-
             <Form 
                 fields={formContent} 
                 handleSubmit={handleSubmit} 
