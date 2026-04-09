@@ -28,7 +28,7 @@
   --color-surface-raised: light-dark(#eae8e3, #101010);
 
   --color-foreground-default: light-dark(#333, #EAE8E3);
-  --color-foreground-subtle: light-dark(#B0B0B0, #5a5a5a);
+  --color-foreground-subtle: light-dark(#7f7f7f, #5a5a5a);
   --color-foreground-inverted: light-dark(#eae8e3, #101010);
   --color-foreground-subtle-inverted: light-dark(#B0B0B0, #a09e99);
   --color-foreground-error: light-dark(#ED3519, #ED3519);
@@ -122,7 +122,17 @@ p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
 }
 
+p.small {
+  font-size: 0.875rem;
+  color: var(--color-foreground-subtle);
+  line-height: 16px;
+}
+
 section {
   display: flex;
   flex-direction: column;
+}
+
+button.loading {
+  color: transparent;
 }

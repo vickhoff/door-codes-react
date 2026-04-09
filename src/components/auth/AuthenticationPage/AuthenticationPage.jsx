@@ -14,6 +14,7 @@ function AuthenticationPage({authType}) {
     const navigate = useNavigate();
     const {setUserData, fetchUser, user } = useAuth()
     const [error, setError] = useState({})
+    const [isLoading, setIsLoading] = useState(false)
 
     const AUTH_CONFIG = {
         login: {
@@ -30,7 +31,7 @@ function AuthenticationPage({authType}) {
                 { component: TextField, autoFocus: true, label: "Email", type: "email", name: "email", required:true, id: "input-email", placeholder: "Enter your email", error: error.email},
                 { component: TextField, label: "Password", type: "password", name: "password", required: true, id: "input-password", placeholder: "Enter your password", error: error.password}
             ],
-            buttons: [{variant: "primary", text: "Login"}],
+            buttons: [{variant: "primary", text: "Login", loading: isLoading}],
             formSubmit: handleLoginForm,
             submitText: "Login",
             formLink: <>Not registered? <Link to="/signup">Signup here</Link></>
@@ -48,7 +49,7 @@ function AuthenticationPage({authType}) {
                 { component: TextField, label: "Email", type: "email", name: "email", required: true, id: "input-email", placeholder: "Enter your email", error: error.email },
                 { component: TextField, label: "Password", type: "password", name: "password", required:true, id: "input-password", placeholder: "Choose a password", error: error.password }
             ],
-            buttons: [{variant: "primary", text: "Signup"}],
+            buttons: [{variant: "primary", text: "Signup", loading: isLoading}],
             formSubmit: handleSignupForm,
             submitText: "Signup",
             formLink: <>Already have an account? <Link to="/login">Login here</Link></>
@@ -58,8 +59,10 @@ function AuthenticationPage({authType}) {
     async function handleLoginForm(loginData) {
         const formData = Object.fromEntries(loginData);
         try {
+            setIsLoading(true)
             await loginUser(formData)
             await fetchUser()
+            setIsLoading(false)
             navigate("/me")
         } catch(error) {
             setError({general: error.message})
@@ -69,8 +72,10 @@ function AuthenticationPage({authType}) {
     async function handleSignupForm(signupData) {
         const formData = Object.fromEntries(signupData);
         try {
+            setIsLoading(true)
             await registerUser(formData)
             await fetchUser()
+            setIsLoading(false)
             navigate("/me")
         } catch (error) {
             if (error.message.toLowerCase().includes("name")) {
