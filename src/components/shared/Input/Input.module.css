@@ -44,7 +44,8 @@
     padding-block: 8px;
     position: absolute;
     z-index: 1;
-    top: 73px;
+    top: 100%;
+    margin-block-start: -12px;
     width: 100%;
     box-sizing: border-box;
     box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
