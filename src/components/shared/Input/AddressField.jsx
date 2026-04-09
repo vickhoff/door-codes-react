@@ -1,6 +1,6 @@
 import autoComplete from "../../../api/address"
 import styles from "./Input.module.css"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { TextField } from "./TextField"
 import SkeletonAddress from "./SkeletonAddress/SkeletonAddress"
 
@@ -9,9 +9,10 @@ export function AddressField({label, error, id, required, disabled, ...rest}) {
     const [addresses, setAddresses] = useState({ suggestions: [] })
     const [inputValue, setInputValue] = useState("")
     const [isLoading, setIsLoading] = useState(false)
-    const [isOpen, setIsOpen] = useState()
+    const [isOpen, setIsOpen] = useState(false)
+    const debounceTimer = useRef(null)
 
-    async function handleInputChange(e) {
+    function handleInputChange(e) {
         const value = e.target.value
         setInputValue(value)
 
@@ -20,21 +21,23 @@ export function AddressField({label, error, id, required, disabled, ...rest}) {
             setIsOpen(false)
             return
         }
-        try {
-            setIsLoading(true);
-            setIsOpen(true);
-            const addresses = await autoComplete(value)               
-            const suggestions = addresses.suggestions ?? []
-            setAddresses({ suggestions })                             
-            if (suggestions.length === 0) setIsOpen(false)
-        } catch {
-            setIsOpen(false)                                                                   
-            setAddresses({ suggestions: [] })
-        } finally {
-            setIsLoading(false)
-        }
 
-
+        clearTimeout(debounceTimer.current)
+        debounceTimer.current = setTimeout(async () => {
+            try {
+                setIsLoading(true)
+                setIsOpen(true)
+                const addresses = await autoComplete(value)
+                const suggestions = addresses.suggestions ?? []
+                setAddresses({ suggestions })
+                if (suggestions.length === 0) setIsOpen(false)
+            } catch {
+                setIsOpen(false)
+                setAddresses({ suggestions: [] })
+            } finally {
+                setIsLoading(false)
+            }
+        }, 300)
     }
 
     function handleAddressClick(place) {
