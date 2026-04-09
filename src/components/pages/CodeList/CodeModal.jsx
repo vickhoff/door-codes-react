@@ -1,7 +1,7 @@
 import Modal from "../../shared/Modal/Modal"
 import Form from "../../shared/Form/Form"
 import { TextField } from "../../shared/Input/TextField"
-import { useState, useMemo } from "react"
+import { useState } from "react"
 import { useUser } from "../../../context/UserContext"
 import { useFetchAPI } from "../../../hooks/useFetchAPI"
 import AddressField from "../../shared/Input/AddressField"
