@@ -62,10 +62,11 @@ function AuthenticationPage({authType}) {
             setIsLoading(true)
             await loginUser(formData)
             await fetchUser()
-            setIsLoading(false)
             navigate("/me")
         } catch(error) {
             setError({general: error.message})
+        } finally {
+            setIsLoading(false)
         }
     }
     
@@ -75,7 +76,6 @@ function AuthenticationPage({authType}) {
             setIsLoading(true)
             await registerUser(formData)
             await fetchUser()
-            setIsLoading(false)
             navigate("/me")
         } catch (error) {
             if (error.message.toLowerCase().includes("name")) {
@@ -85,6 +85,8 @@ function AuthenticationPage({authType}) {
             } else {
                 setError(prev => ({ ...prev, password: error.message }))
             }
+        } finally {
+            setIsLoading(false)
         }
     }
 
