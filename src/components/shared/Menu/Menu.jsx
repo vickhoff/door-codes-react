@@ -12,7 +12,8 @@ import { Children, cloneElement, useState } from "react"
 function Menu({ theme, pages, children }) {
     const [navIsVisible, setNavIsVisible] = useState(false)
     const styledChildren = Children.map(children, child => {
-        return cloneElement(child, { className: theme === "light" ? styles.light : styles.dark })
+        return   cloneElement(child, { className: `${child.props.className ?? ""} ${theme === "light" ? 
+            styles.light : styles.dark}`.trim() }) 
     })
 
     return (

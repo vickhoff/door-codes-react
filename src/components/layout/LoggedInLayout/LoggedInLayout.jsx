@@ -32,7 +32,7 @@ function LoggedInLayout() {
             <div className={styles.layout}></div>
             <header className={styles.loggedInMenu}>
                 <Menu pages={pages} theme={"dark"}>
-                    <button onClick={handleLogout}>Log out {isLoading && <Spinner />}</button>
+                    <button onClick={handleLogout} className={isLoading && "loading"}>Log out {isLoading && <Spinner />}</button>
                 </Menu>
             </header>
             <main className={styles.loggedInMain}>
