@@ -20,14 +20,20 @@ export function AddressField({label, error, id, required, disabled, ...rest}) {
             setIsOpen(false)
             return
         }
+        try {
+            setIsLoading(true);
+            setIsOpen(true);
+            const addresses = await autoComplete(value)               
+            const suggestions = addresses.suggestions ?? []
+            setAddresses({ suggestions })                             
+            if (suggestions.length === 0) setIsOpen(false)
+        } catch {
+            setIsOpen(false)                                                                   
+            setAddresses({ suggestions: [] })
+        } finally {
+            setIsLoading(false)
+        }
 
-        setIsLoading(true);
-        setIsOpen(true);
-        const addresses = await autoComplete(value)               
-        const suggestions = addresses.suggestions ?? []
-        setAddresses({ suggestions })                             
-        setIsLoading(false)
-        if (suggestions.length === 0) setIsOpen(false)
 
     }
 
