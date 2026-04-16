@@ -1,6 +1,6 @@
 # Door Codes
 
-A web app for storing and managing door codes for places you visit — like friends' apartments, offices, or gyms. End goal is that codes are sorted by proximity so the nearest one is always at the top, using Google API, but as for now, the locations are faked.
+A web app for storing and managing door codes for places you visit — like friends' apartments, offices, or gyms. End goal is that codes are sorted by proximity so the nearest one is always at the top, using Google API, but as for now, the distance to nearest are fake.
 
 Hosted at: https://www.door-codes-react.vercel.app
 
@@ -10,7 +10,7 @@ This was a project built at **Hyper Island** as part of a React course. The goal
 
 ## Planned Features
 
-- **Google Maps API integration** — mark door codes on a map and automatically highlight codes near your current location
+- **Google Maps API integration** — mark door codes on a map and automatically highlight codes near your current location (WIP)
 
 ## Tech Stack
 
