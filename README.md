@@ -1,6 +1,6 @@
 # Door Codes
 
-A web app for storing and managing door codes for places you visit — like friends' apartments, offices, or gyms. Codes are sorted by proximity so the nearest one is always at the top.
+A web app for storing and managing door codes for places you visit — like friends' apartments, offices, or gyms. End goal is that codes are sorted by proximity so the nearest one is always at the top, using Google API, but as for now, the locations are faked.
 
 Hosted at: https://www.door-codes-react.vercel.app
 
