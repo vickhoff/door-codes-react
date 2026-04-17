@@ -1,57 +1,58 @@
 .rowContainer {
-    display: flex;
-    width: 100%;
-    font-weight: 500;
-    padding-inline: 24px;
-    cursor: pointer;
-    transition: 0.2s ease-in-out all;
-    border-radius: 8px;
-    background: none;
-    border: none;
-    text-align: left;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
+  display: flex;
+  width: 100%;
+  font-weight: 500;
+  padding-inline: 24px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out all;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
 .innerContainer {
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    flex: 1;
-    padding-block: 16px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex: 1;
+  padding-block: 16px;
 }
 
+/* REVIEW: Hardcoded hex color `#FFF3ED` instead of using a CSS variable from
+   the design system. This won't adapt to theme changes. */
 .rowContainer:hover {
-    background-color: #FFF3ED;
+  background-color: #fff3ed;
 }
 
 .rowContainer:not(:last-child) .innerContainer {
-    border-block-end: 1px solid var(--color-border)
+  border-block-end: 1px solid var(--color-border);
 }
 
 .code {
-    font-family: var(--type-code);
-    font-size: 2rem;
+  font-family: var(--type-code);
+  font-size: 2rem;
 }
 
 .distance {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
 }
 
 @media (width <= 400px) {
-    .rowContainer {
-        padding-inline: 16px
-    }
+  .rowContainer {
+    padding-inline: 16px;
+  }
 
-    .innerContainer {
-        padding-block: 12px;
-    }
+  .innerContainer {
+    padding-block: 12px;
+  }
 
-    .code {
-        font-size: 1.6rem;
-    }
+  .code {
+    font-size: 1.6rem;
+  }
 }
-

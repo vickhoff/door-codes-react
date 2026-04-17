@@ -1,83 +1,123 @@
-import Modal from "../../shared/Modal/Modal"
-import Form from "../../shared/Form/Form"
-import { TextField } from "../../shared/Input/TextField"
-import { useState } from "react"
-import { useUser } from "../../../context/UserContext"
-import { useFetchAPI } from "../../../hooks/useFetchAPI"
-import AddressField from "../../shared/Input/AddressField"
+import Modal from "../../shared/Modal/Modal";
+import Form from "../../shared/Form/Form";
+import { TextField } from "../../shared/Input/TextField";
+import { useState } from "react";
+import { useUser } from "../../../context/UserContext";
+import { useFetchAPI } from "../../../hooks/useFetchAPI";
+import AddressField from "../../shared/Input/AddressField";
 
+function CodeModal({ onClose, mode, codeId }) {
+  // REVIEW: In "add" mode, `codeId` is undefined, so this fetches `/api/items/undefined`
+  // which will 404. Either skip the fetch when mode === "add" (e.g. pass `null` as URL
+  // and guard in useFetchAPI), or conditionally call the hook.
+  const { data: code, isLoading: codeIsLoading } = useFetchAPI(
+    `/api/items/${codeId}`,
+    null,
+  );
 
+  const { addCodeItem, updateCodeItem, deleteCodeItem } = useUser();
 
-function CodeModal({onClose, mode, codeId}) {
-    const { data: code, isLoading: codeIsLoading } = useFetchAPI(`/api/items/${codeId}`, null)
+  // REVIEW: `setErrors` is never called anywhere in this component. The `errors`
+  // object always stays at its initial value (all nulls), so field-level validation
+  // errors will never appear. Either implement validation or remove this state.
+  const [errors, setErrors] = useState({
+    name: null,
+    code: null,
+    address: null,
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
-    const { addCodeItem, updateCodeItem, deleteCodeItem } = useUser()
+  async function handleSubmit(codeData) {
+    const formData = Object.fromEntries(codeData);
 
-    const [errors, setErrors] = useState({
-        name: null,
-        code: null,
-        address: null
-    })
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [isDeleting, setIsDeleting] = useState(false)
-
-    async function handleSubmit(codeData) {
-        const formData = Object.fromEntries(codeData)
-
-        try {
-            setIsSubmitting(true)
-            if (mode === "add") await addCodeItem(formData)
-            if (mode === "edit") await updateCodeItem(formData, codeId)
-            onClose()
-        } catch(error) {
-            console.error(error)
-        } finally {
-            setIsSubmitting(false)
-        }
+    try {
+      setIsSubmitting(true);
+      if (mode === "add") await addCodeItem(formData);
+      if (mode === "edit") await updateCodeItem(formData, codeId);
+      onClose();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
+  }
 
-    async function handleDelete() {
-        setIsDeleting(true)
-        try {
-            await deleteCodeItem(codeId)
-            onClose()
-        } catch(error) {
-            console.error(error)
-        } finally {
-            setIsDeleting(false)
-        }
+  async function handleDelete() {
+    setIsDeleting(true);
+    try {
+      await deleteCodeItem(codeId);
+      onClose();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsDeleting(false);
     }
+  }
 
-    const formContent = [
-        { component: TextField, autoFocus: true, label: "Code title", placeholder:"My friends place", name: "name", required:true, id: "input-title", error: errors.name, defaultValue: mode === "edit" ? code?.name : undefined},
-        { component: AddressField, label: "Address", placeholder:"My friends address", name: "address", required: true, id: "input-address", error: errors.address, defaultValue: mode === "edit" ? code?.address : undefined},
-        { component: TextField, label: "Code", placeholder:"The door code", name: "code", required: true, id: "input-", error: errors.code, defaultValue: mode === "edit" ? code?.code : undefined}
-    ]
+  const formContent = [
+    {
+      component: TextField,
+      autoFocus: true,
+      label: "Code title",
+      placeholder: "My friends place",
+      name: "name",
+      required: true,
+      id: "input-title",
+      error: errors.name,
+      defaultValue: mode === "edit" ? code?.name : undefined,
+    },
+    {
+      component: AddressField,
+      label: "Address",
+      placeholder: "My friends address",
+      name: "address",
+      required: true,
+      id: "input-address",
+      error: errors.address,
+      defaultValue: mode === "edit" ? code?.address : undefined,
+    },
+    // REVIEW: `id: "input-"` is incomplete — this should be something like `id: "input-code"`.
+    // An empty-suffix id can cause accessibility and label-association issues.
+    {
+      component: TextField,
+      label: "Code",
+      placeholder: "The door code",
+      name: "code",
+      required: true,
+      id: "input-",
+      error: errors.code,
+      defaultValue: mode === "edit" ? code?.code : undefined,
+    },
+  ];
 
-    const buttonsEdit = [
-        {variant: "destructive", text: "Delete", type: "button", loading: isDeleting, onClick:handleDelete },
-        {variant: "ghost", text: "Cancel", type: "button", onClick: onClose},
-        {variant: "primary", text: "Save", loading: isSubmitting}
-    ]
+  const buttonsEdit = [
+    {
+      variant: "destructive",
+      text: "Delete",
+      type: "button",
+      loading: isDeleting,
+      onClick: handleDelete,
+    },
+    { variant: "ghost", text: "Cancel", type: "button", onClick: onClose },
+    { variant: "primary", text: "Save", loading: isSubmitting },
+  ];
 
-    const buttonsAdd = [
-        {variant: "ghost", text: "Cancel", type: "button", onClick: onClose},
-        {variant: "primary", text: "Add code", loading: isSubmitting}
-    ]
-    
-    return (
-        <Modal 
-            title={mode === "edit" ? "Edit code" : "Add code"}
-            onClose={onClose}
-        >
-            <Form 
-                fields={formContent} 
-                handleSubmit={handleSubmit} 
-                isLoading={mode === "edit" && codeIsLoading}   
-                buttons={mode === "edit" ? buttonsEdit : buttonsAdd}
-            />
-        </Modal>
-    )
+  const buttonsAdd = [
+    { variant: "ghost", text: "Cancel", type: "button", onClick: onClose },
+    { variant: "primary", text: "Add code", loading: isSubmitting },
+  ];
+
+  return (
+    <Modal title={mode === "edit" ? "Edit code" : "Add code"} onClose={onClose}>
+      <Form
+        fields={formContent}
+        handleSubmit={handleSubmit}
+        isLoading={mode === "edit" && codeIsLoading}
+        buttons={mode === "edit" ? buttonsEdit : buttonsAdd}
+      />
+    </Modal>
+  );
 }
 
-export default CodeModal
+export default CodeModal;

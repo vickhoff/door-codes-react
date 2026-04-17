@@ -1,34 +1,37 @@
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react";
 
 export function useFetchAPI(url, initialValue) {
-    const[data, setData] = useState(initialValue)
-    const [isLoading, setIsLoading] = useState(true)
-    const [error, setError] = useState(null)
+  const [data, setData] = useState(initialValue);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    async function fetchData() {
-        try {
-            const response = await fetch(url, {
-                credentials: "include"
-            })
+  async function fetchData() {
+    try {
+      const response = await fetch(url, {
+        credentials: "include",
+      });
 
-            if(!response.ok) {
-                const error = await response.json()
-                 throw new Error(error.message || "Something went wrong")
-            }
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Something went wrong");
+      }
 
-            const result = await response.json()
-            setData(result)
-        } catch(error) {
-            setError(error.message)
-        } finally {
-            setIsLoading(false)
-        }
+      const result = await response.json();
+      setData(result);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
+  }
 
-    useEffect(() => {
-        if (!url) return
-        fetchData()
-    },[])
+  // REVIEW: `url` is used inside the effect but is missing from the dependency
+  // array. If the URL changes (e.g. dynamic route param), the effect won't re-run
+  // and stale data will be shown. Add `url` to the dependency array.
+  useEffect(() => {
+    if (!url) return;
+    fetchData();
+  }, []);
 
-    return { data, isLoading, error, setData }
+  return { data, isLoading, error, setData };
 }
