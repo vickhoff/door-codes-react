@@ -1,40 +1,48 @@
 .container {
-    display: flex;
-    width: 100%;
-    gap: 8px;
-    padding: 8px;
-    background-color: rgba(255,255,255,0.1);
-    border-radius: 16px;
-    margin-bottom: 16px;
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  margin-bottom: 16px;
 }
 
+/* REVIEW: `box-shadow` is declared twice — first as a shadow value, then immediately
+   overridden to `none`. The first declaration is dead code. Remove it. */
 .filterButton {
-    flex: 1 1 32px;
-    border-radius: 8px;
-    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.10);
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    color: var(--color-foreground-inverted);
-    transition: all ease-in-out 0.2s;
-    cursor: pointer;
+  flex: 1 1 32px;
+  border-radius: 8px;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--color-foreground-inverted);
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
 }
 
 .filterButton:hover {
-    background-color: color-mix(in srgb, var(--color-foreground-inverted) 10%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--color-foreground-inverted) 10%,
+    transparent
+  );
 }
 
 .active {
-    background-color: var(--color-surface-default);
-    color: var(--color-foreground-default)
+  background-color: var(--color-surface-default);
+  color: var(--color-foreground-default);
 }
 
+/* REVIEW: Hardcoded `white` instead of using a design-token variable like
+   `var(--color-surface-default)`. This will break if a dark theme is added. */
 .active:hover {
-    background-color: white;
+  background-color: white;
 }
 
 @media (width <=400px) {
-    .container{
-        flex-direction: column;
-    }
+  .container {
+    flex-direction: column;
+  }
 }

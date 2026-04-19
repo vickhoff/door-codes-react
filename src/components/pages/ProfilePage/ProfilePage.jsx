@@ -1,38 +1,51 @@
-import { useAuth } from "../../../context/AuthContext"
-import { useState } from "react"
-import CodeList from "../CodeList/CodeList"
-import PageHeader from "../../shared/PageHeader/PageHeader"
-import styles from "./ProfilePage.module.css"
-import { createPortal } from 'react-dom'
-import CodeModal from "../CodeList/CodeModal"
-
+import { useAuth } from "../../../context/AuthContext";
+import { useState } from "react";
+import CodeList from "../CodeList/CodeList";
+import PageHeader from "../../shared/PageHeader/PageHeader";
+import styles from "./ProfilePage.module.css";
+import { createPortal } from "react-dom";
+import CodeModal from "../CodeList/CodeModal";
 
 function ProfilePage() {
-    
-    const { user, loading: isLoadingAuth } = useAuth()
-    const [showAddModal, setShowAddModal] = useState(false)
-    const [showEditModal, setShowEditModal] = useState(false)
-    const [clickedItemId, setClickedItemId] = useState()
+  // REVIEW: `isLoadingAuth` is destructured but never used — the component renders
+  // even while auth is loading. If `user` is null during loading, `user.name` on line 24
+  // will throw. Either guard against null or use `isLoadingAuth` to show a loading state.
+  const { user, loading: isLoadingAuth } = useAuth();
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [clickedItemId, setClickedItemId] = useState();
 
-    function handleEditCode(id) {
-        setClickedItemId(id)
-        setShowEditModal(true)
-    }
-    
-    return (
-        <section className={styles.section}>
-            <PageHeader title={`Welcome ${user.name}`} message={"What code did you forget today?"}/>
-            <CodeList onAddCode={() => setShowAddModal(true)} onEditCode={handleEditCode} />
-            {showAddModal && createPortal(
-                <CodeModal mode="add" onClose={() => setShowAddModal(false)} />,
-                document.body
-            )}
-            {showEditModal && createPortal(
-                <CodeModal mode="edit" codeId={clickedItemId} onClose={() => setShowEditModal(false)} />,
-                document.body
-            )}
-        </section>
-    )
+  function handleEditCode(id) {
+    setClickedItemId(id);
+    setShowEditModal(true);
+  }
+
+  return (
+    <section className={styles.section}>
+      <PageHeader
+        title={`Welcome ${user.name}`}
+        message={"What code did you forget today?"}
+      />
+      <CodeList
+        onAddCode={() => setShowAddModal(true)}
+        onEditCode={handleEditCode}
+      />
+      {showAddModal &&
+        createPortal(
+          <CodeModal mode="add" onClose={() => setShowAddModal(false)} />,
+          document.body,
+        )}
+      {showEditModal &&
+        createPortal(
+          <CodeModal
+            mode="edit"
+            codeId={clickedItemId}
+            onClose={() => setShowEditModal(false)}
+          />,
+          document.body,
+        )}
+    </section>
+  );
 }
 
-export default ProfilePage
+export default ProfilePage;

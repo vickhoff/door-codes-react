@@ -19,34 +19,36 @@
   --color-surface-bold: light-dark(rgb(212, 212, 212), rgb(39 39 39));
 
   --color-surface-inverted: light-dark(#111111, #eae8e3);
-  --color-surface-accent: light-dark(#D16641, #453F73);
-  --color-surface-accent-hover: light-dark(#b8411a, #453F73);
-  --color-surface-accent-subtle: light-dark(#faece7, #453F73);
+  --color-surface-accent: light-dark(#d16641, #453f73);
+  --color-surface-accent-hover: light-dark(#b8411a, #453f73);
+  --color-surface-accent-subtle: light-dark(#faece7, #453f73);
   --color-surface-accent-bold: light-dark(#3c2a63, #09071d);
   --color-surface-error: light-dark(#e61111, #dc3939);
   --color-surface-error-subtle: light-dark(#f7e6e6, #dc3939);
   --color-surface-raised: light-dark(#eae8e3, #101010);
 
-  --color-foreground-default: light-dark(#333, #EAE8E3);
+  --color-foreground-default: light-dark(#333, #eae8e3);
   --color-foreground-subtle: light-dark(#7f7f7f, #5a5a5a);
   --color-foreground-inverted: light-dark(#eae8e3, #101010);
-  --color-foreground-subtle-inverted: light-dark(#B0B0B0, #a09e99);
-  --color-foreground-error: light-dark(#ED3519, #ED3519);
-  --color-foreground-accent: light-dark(#D16641, #453F73);
+  --color-foreground-subtle-inverted: light-dark(#b0b0b0, #a09e99);
+  --color-foreground-error: light-dark(#ed3519, #ed3519);
+  --color-foreground-accent: light-dark(#d16641, #453f73);
 
-  --color-border: light-dark(#CFCFCF, #3a3a3a);
+  --color-border: light-dark(#cfcfcf, #3a3a3a);
   --color-border-bold: light-dark(var(--color-surface-inverted), #3a3a3a);
 
-  --color-border-accent: light-dark(rgba(29, 22, 86, 0.38), rgb(137 132 179 / 38%));
+  --color-border-accent: light-dark(
+    rgba(29, 22, 86, 0.38),
+    rgb(137 132 179 / 38%)
+  );
 
-  --color-link: light-dark(#4550E9, #4550E9);
+  --color-link: light-dark(#4550e9, #4550e9);
 
   /* Typography variables */
 
   --type-sans: "Instrument Sans", sans-serif;
   --type-serif: "Instrument Serif", serif;
   --type-code: "Anonymous Pro", monospace;
-
 }
 
 a {
@@ -59,14 +61,17 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  /* REVIEW: `--body-padding` is referenced here but never defined in :root or
+     anywhere else. This resolves to nothing (no padding). Either define the
+     variable or replace with a concrete value. */
   padding: var(--body-padding);
-  box-sizing: border-box;  
+  box-sizing: border-box;
 }
 
 h1,
-h2, 
-h3, 
-h4, 
+h2,
+h3,
+h4,
 h5 {
   font-family: var(--type-serif);
   font-weight: 400;
@@ -95,12 +100,23 @@ h2 {
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
+/* REVIEW: This CSS reset (margin: 0, padding: 0 on *, and box-sizing: border-box)
+   appears after component styles above that may rely on default browser margins.
+   Move the reset to the top of the file so all subsequent rules build on a
+   consistent baseline. Additionally, body already sets `box-sizing: border-box`
+   on line 63 — this is redundant with the universal reset here. */
 /* Reset */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -109,16 +125,29 @@ h2 {
   padding: 0;
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 

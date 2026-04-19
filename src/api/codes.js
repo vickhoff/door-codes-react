@@ -1,44 +1,45 @@
 async function createCode(codeData) {
-    const response = await fetch("/api/items/add", {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(codeData),
-    })
+  const response = await fetch("/api/items/add", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(codeData),
+  });
 
-        if (!response.ok) throw new Error("Failed to add code")
+  // REVIEW: This if-statement is indented inconsistently with the rest of the file (see updateCode/deleteCode which are correct).
+  if (!response.ok) throw new Error("Failed to add code");
 
-    return response.json()
+  return response.json();
 }
 
 async function updateCode(codeData, id) {
-    const response = await fetch(`/api/items/update/${id}`, {
-        method: "PATCH",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(codeData),
-    })
+  const response = await fetch(`/api/items/update/${id}`, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(codeData),
+  });
 
-    if (!response.ok) throw new Error("Failed to update code")
+  if (!response.ok) throw new Error("Failed to update code");
 
-    return response.json()
+  return response.json();
 }
 
 async function deleteCode(id) {
-    const response = await fetch(`/api/items/delete/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-    })
+  const response = await fetch(`/api/items/delete/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
 
-    if (!response.ok) throw new Error("Failed to delete code")
+  if (!response.ok) throw new Error("Failed to delete code");
 
-    return response.json()
+  return response.json();
 }
 
-export { createCode, updateCode, deleteCode }
+export { createCode, updateCode, deleteCode };

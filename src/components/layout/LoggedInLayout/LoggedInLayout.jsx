@@ -1,46 +1,48 @@
-import { Outlet, useNavigate } from "react-router-dom"
-import styles from "./LoggedInLayout.module.css"
-import { useAuth } from "../../../context/AuthContext"
-import Menu from "../../shared/Menu/Menu"
-import { useState } from "react"
-import Spinner from "../../shared/Spinner/Spinner"
+import { Outlet, useNavigate } from "react-router-dom";
+import styles from "./LoggedInLayout.module.css";
+import { useAuth } from "../../../context/AuthContext";
+import Menu from "../../shared/Menu/Menu";
+import { useState } from "react";
+import Spinner from "../../shared/Spinner/Spinner";
 
 function LoggedInLayout() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
-    const { logout } = useAuth()
-    const navigate = useNavigate()
-    const [isLoading, setIsLoading] = useState(false)
-
-    async function handleLogout() {
-        try {                      
-            setIsLoading(true)
-            await logout()    
-            navigate("/login")                                                             
-        } finally {           
-            setIsLoading(false)                                                            
-        }  
+  // REVIEW: No catch block — if logout() rejects (network failure, server error),
+  // the error will be silently swallowed by the finally block. Add a catch to
+  // show the user feedback or at least log the error.
+  async function handleLogout() {
+    try {
+      setIsLoading(true);
+      await logout();
+      navigate("/login");
+    } finally {
+      setIsLoading(false);
     }
+  }
 
-    const pages = [
-        {title: "Codes", url: "/me"},
-        {title: "User settings", url: "/settings"}
-    ]
+  const pages = [
+    { title: "Codes", url: "/me" },
+    { title: "User settings", url: "/settings" },
+  ];
 
-    return (
-
-        <div className={styles.container}>
-            <div className={styles.layout}></div>
-            <header className={styles.loggedInMenu}>
-                <Menu pages={pages} theme={"dark"}>
-                    <button onClick={handleLogout} className={isLoading && "loading"}>Log out {isLoading && <Spinner />}</button>
-                </Menu>
-            </header>
-            <main className={styles.loggedInMain}>
-                <Outlet />
-            </main>
-        </div>
-
-    )
+  return (
+    <div className={styles.container}>
+      <div className={styles.layout}></div>
+      <header className={styles.loggedInMenu}>
+        <Menu pages={pages} theme={"dark"}>
+          <button onClick={handleLogout} className={isLoading && "loading"}>
+            Log out {isLoading && <Spinner />}
+          </button>
+        </Menu>
+      </header>
+      <main className={styles.loggedInMain}>
+        <Outlet />
+      </main>
+    </div>
+  );
 }
 
-export default LoggedInLayout
+export default LoggedInLayout;

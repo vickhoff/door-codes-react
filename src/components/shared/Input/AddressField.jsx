@@ -10,6 +10,9 @@ export function AddressField({label, error, id, required, disabled, ...rest}) {
     const [inputValue, setInputValue] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
+    // REVIEW: The debounce timeout is never cleared on unmount. If the component
+    // unmounts before the timer fires, it will try to call setAddresses / setIsOpen
+    // on an unmounted component. Add a useEffect cleanup: return () => clearTimeout(debounceTimer.current)
     const debounceTimer = useRef(null)
 
     function handleInputChange(e) {
@@ -47,6 +50,11 @@ export function AddressField({label, error, id, required, disabled, ...rest}) {
     }
 
     return (
+        {/* REVIEW: Missing space between `role="combobox"` and `className` — this works
+            but is a formatting issue that linters should catch. */}
+        {/* REVIEW: `aria-expanded` on line 52 is placed on the <ul role="listbox"> but per
+            WAI-ARIA the `aria-expanded` attribute belongs on the combobox element (this div),
+            not on the listbox. Move it here. */}
         <div role="combobox"className={styles.addressField}>
             <TextField label={label} data-1p-ignore error={error} id={id} required={required} disabled={disabled} value={inputValue} onChange={(e) => handleInputChange(e)} {...rest} />
             <ul role="listbox" aria-expanded={inputValue.length > 2} className={`${styles.addressList} ${isOpen ? styles.visible : ""}`}>
@@ -54,6 +62,10 @@ export function AddressField({label, error, id, required, disabled, ...rest}) {
                     isLoading ? <SkeletonAddress /> : 
                     addresses.suggestions.map(place => (
                         <li role="option" key={place.placePrediction.placeId}>
+                            {/* REVIEW: This <button> has no `type="button"`, so it defaults
+                                to `type="submit"`. When inside a <form>, clicking an address
+                                suggestion will submit the form instead of selecting the address.
+                                Add `type="button"` to prevent this. */}
                             <button className={styles.addressButton} onClick={() => handleAddressClick(place)}>
                                 <p>{place.placePrediction?.structuredFormat?.mainText?.text}</p>
                                 <p className="small">{place.placePrediction?.structuredFormat?.secondaryText?.text}</p>
