@@ -10,15 +10,14 @@ function LoggedInLayout() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
-  // REVIEW: No catch block — if logout() rejects (network failure, server error),
-  // the error will be silently swallowed by the finally block. Add a catch to
-  // show the user feedback or at least log the error.
   async function handleLogout() {
     try {
       setIsLoading(true);
       await logout();
       navigate("/login");
-    } finally {
+    } catch {
+        console.error("Something went wrong")
+    }  finally {
       setIsLoading(false);
     }
   }

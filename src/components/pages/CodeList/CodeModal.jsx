@@ -1,25 +1,21 @@
-import Modal from "../../shared/Modal/Modal";
-import Form from "../../shared/Form/Form";
-import { TextField } from "../../shared/Input/TextField";
-import { useState } from "react";
-import { useUser } from "../../../context/UserContext";
-import { useFetchAPI } from "../../../hooks/useFetchAPI";
-import AddressField from "../../shared/Input/AddressField";
+import Modal from "../../shared/Modal/Modal"
+import Form from "../../shared/Form/Form"
+import { TextField } from "../../shared/Input/TextField"
+import { useState, useMemo } from "react"
+import { useUser } from "../../../context/UserContext"
+import { useFetchAPI } from "../../../hooks/useFetchAPI"
+import AddressField from "../../shared/Input/AddressField"
+
+
 
 function CodeModal({ onClose, mode, codeId }) {
-  // REVIEW: In "add" mode, `codeId` is undefined, so this fetches `/api/items/undefined`
-  // which will 404. Either skip the fetch when mode === "add" (e.g. pass `null` as URL
-  // and guard in useFetchAPI), or conditionally call the hook.
-  const { data: code, isLoading: codeIsLoading } = useFetchAPI(
-    `/api/items/${codeId}`,
+  const { data: code, isLoading: codeIsLoading } = useFetchAPI( mode === "edit" ?
+    `/api/items/${codeId}` : null,
     null,
   );
 
   const { addCodeItem, updateCodeItem, deleteCodeItem } = useUser();
 
-  // REVIEW: `setErrors` is never called anywhere in this component. The `errors`
-  // object always stays at its initial value (all nulls), so field-level validation
-  // errors will never appear. Either implement validation or remove this state.
   const [errors, setErrors] = useState({
     name: null,
     code: null,
@@ -27,21 +23,23 @@ function CodeModal({ onClose, mode, codeId }) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [pickedAddress, setPickedAddress] = useState(null);
 
-  async function handleSubmit(codeData) {
-    const formData = Object.fromEntries(codeData);
+    async function handleSubmit(codeData) {
+        const formData = Object.fromEntries(codeData)
+        formData.address = pickedAddress ?? code?.address
 
-    try {
-      setIsSubmitting(true);
-      if (mode === "add") await addCodeItem(formData);
-      if (mode === "edit") await updateCodeItem(formData, codeId);
-      onClose();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
+        try {
+            setIsSubmitting(true)
+            if (mode === "add") await addCodeItem(formData)
+            if (mode === "edit") await updateCodeItem(formData, codeId)
+            onClose()
+        } catch(error) {
+            console.error(error)
+        } finally {
+            setIsSubmitting(false)
+        }
     }
-  }
 
   async function handleDelete() {
     setIsDeleting(true);
@@ -75,17 +73,16 @@ function CodeModal({ onClose, mode, codeId }) {
       required: true,
       id: "input-address",
       error: errors.address,
-      defaultValue: mode === "edit" ? code?.address : undefined,
+      defaultValue: mode === "edit" ? code?.address.text : undefined,
+      onAddressSelect: setPickedAddress,
     },
-    // REVIEW: `id: "input-"` is incomplete — this should be something like `id: "input-code"`.
-    // An empty-suffix id can cause accessibility and label-association issues.
     {
       component: TextField,
       label: "Code",
       placeholder: "The door code",
       name: "code",
       required: true,
-      id: "input-",
+      id: "input-code",
       error: errors.code,
       defaultValue: mode === "edit" ? code?.code : undefined,
     },

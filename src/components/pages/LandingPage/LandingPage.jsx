@@ -3,9 +3,6 @@ import LogoBlack from "../../../assets/images/logo-black.svg";
 import Hero1 from "../../../assets/images/hero-1.png";
 import Hero2 from "../../../assets/images/hero-2.png";
 import styles from "./LandingPage.module.css";
-// REVIEW: `NavBar` is imported but never used directly in this component
-// (it's used inside Menu). Remove this unused import.
-import NavBar from "../../shared/NavBar/NavBar";
 import { Link } from "react-router";
 import Menu from "../../shared/Menu/Menu";
 import ChatBubble from "./ChatBubble/ChatBubble";

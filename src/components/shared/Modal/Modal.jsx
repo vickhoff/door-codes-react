@@ -1,7 +1,6 @@
 import styles from "./Modal.module.css"
 import closeIcon from "../../../assets/images/close-icon-black.svg"
-// REVIEW: `useRef` is imported but never used. Remove it.
-import { useRef, useEffect } from 'react'
+import { useEffect } from 'react'
 
 
 function Modal({onClose, title, children}) {
@@ -16,17 +15,13 @@ function Modal({onClose, title, children}) {
 }, [onClose])
 
   return (
-    {/* REVIEW: Clicking the backdrop (modalWrapper) doesn't close the modal.
-        This is a common UX expectation. Consider adding onClick={onClose} to
-        the wrapper and e.stopPropagation() on the inner modal div. */}
-    {/* REVIEW: Body scroll is not locked when the modal is open. Users can scroll
-        the page behind the modal overlay. Consider adding overflow:hidden to body. */}
-    <div className={styles.modalWrapper}>
+    <div className={styles.modalWrapper} onClick={onClose}>
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-title"
           className={styles.modal}
+          onClick={(e) => e.stopPropagation()}
         >
           <header className={styles.modalHeader}>
               <h2>{title}</h2>

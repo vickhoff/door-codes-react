@@ -7,10 +7,7 @@ import { createPortal } from "react-dom";
 import CodeModal from "../CodeList/CodeModal";
 
 function ProfilePage() {
-  // REVIEW: `isLoadingAuth` is destructured but never used — the component renders
-  // even while auth is loading. If `user` is null during loading, `user.name` on line 24
-  // will throw. Either guard against null or use `isLoadingAuth` to show a loading state.
-  const { user, loading: isLoadingAuth } = useAuth();
+  const { user } = useAuth();
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [clickedItemId, setClickedItemId] = useState();
@@ -23,7 +20,7 @@ function ProfilePage() {
   return (
     <section className={styles.section}>
       <PageHeader
-        title={`Welcome ${user.name}`}
+        title={`Welcome ${user?.name}`}
         message={"What code did you forget today?"}
       />
       <CodeList

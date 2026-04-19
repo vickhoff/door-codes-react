@@ -1,3 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
 :root {
   font-family: var(--type-sans);
   line-height: 1.5;
@@ -61,9 +82,6 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  /* REVIEW: `--body-padding` is referenced here but never defined in :root or
-     anywhere else. This resolves to nothing (no padding). Either define the
-     variable or replace with a concrete value. */
   padding: var(--body-padding);
   box-sizing: border-box;
 }
@@ -106,39 +124,6 @@ h2 {
   100% {
     background-position: -200% 0;
   }
-}
-
-/* REVIEW: This CSS reset (margin: 0, padding: 0 on *, and box-sizing: border-box)
-   appears after component styles above that may rely on default browser margins.
-   Move the reset to the top of the file so all subsequent rules build on a
-   consistent baseline. Additionally, body already sets `box-sizing: border-box`
-   on line 63 — this is redundant with the universal reset here. */
-/* Reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-input,
-button,
-textarea,
-select {
-  font: inherit;
 }
 
 p,
