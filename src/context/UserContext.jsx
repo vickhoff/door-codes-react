@@ -47,9 +47,7 @@ export function UserProvider({ children }) {
   }
 
   async function deleteCodeItem(id) {
-    // REVIEW: `deletedItem` is destructured but never used. Either use it
-    // (e.g. for a toast/notification) or simplify to `await deleteCode(id)`.
-    const { data: deletedItem } = await deleteCode(id);
+    await deleteCode(id);
     setData((prev) => prev.filter((codeItem) => codeItem._id !== id));
   }
 

@@ -5,17 +5,14 @@ import Form from "../../shared/Form/Form";
 import { TextField } from "../../shared/Input/TextField";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
-// REVIEW: `useRef` is imported but never used in this file. Remove it.
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { loginUser, registerUser } from "../../../api/auth";
 import { Link } from "react-router-dom";
 
 function AuthenticationPage({ authType }) {
   const navigate = useNavigate();
-  // REVIEW: `setUserData` is destructured here but does not exist in AuthContext.
-  // AuthContext only exposes { user, loading, logout, fetchUser }. This will be
-  // `undefined` at runtime. Remove it or add it to AuthContext if needed.
-  const { setUserData, fetchUser, user } = useAuth();
+
+  const { fetchUser, user } = useAuth();
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 

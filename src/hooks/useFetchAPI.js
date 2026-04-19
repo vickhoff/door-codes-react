@@ -25,13 +25,10 @@ export function useFetchAPI(url, initialValue) {
     }
   }
 
-  // REVIEW: `url` is used inside the effect but is missing from the dependency
-  // array. If the URL changes (e.g. dynamic route param), the effect won't re-run
-  // and stale data will be shown. Add `url` to the dependency array.
   useEffect(() => {
     if (!url) return;
     fetchData();
-  }, []);
+  }, [url]);
 
   return { data, isLoading, error, setData };
 }

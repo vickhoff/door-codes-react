@@ -9,9 +9,6 @@ export function TextField({ label, error, id, required, disabled, ...rest }) {
           {required && <span className={styles.required}> *</span>}
         </label>
       )}
-      {/* REVIEW: Extra space around `disabled = {disabled}` and missing space
-                before `required` — should be `disabled={disabled} required={required}`.
-                Inconsistent formatting. */}
       <input
         className={`${styles.input} ${error && styles.inputError}`}
         id={id}
