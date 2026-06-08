@@ -42,17 +42,11 @@
   background-repeat: no-repeat;
 }
 
-/* REVIEW: Empty rule — this does nothing. Remove it or add the intended styles. */
-.heroContainer.signup {
-}
-
-/* REVIEW: `align-items: center` is declared twice in this rule (lines 50 and 52). Remove the duplicate. */
 .formContainer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 72px;
-  align-items: center;
 }
 
 .formContainer form {
@@ -71,12 +65,8 @@
   align-self: flex-start;
 }
 
-/* REVIEW: `.logoCentered` is defined twice — the second rule (display: none)
-   overrides the first (margin-inline: auto). Merge these into one rule. */
 .logoCentered {
   margin-inline: auto;
-}
-.logoCentered {
   display: none;
 }
 

@@ -9,7 +9,6 @@ async function createCode(codeData) {
     body: JSON.stringify(codeData),
   });
 
-  // REVIEW: This if-statement is indented inconsistently with the rest of the file (see updateCode/deleteCode which are correct).
   if (!response.ok) throw new Error("Failed to add code");
 
   return response.json();

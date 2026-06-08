@@ -1,5 +1,4 @@
 import { ButtonLink } from "../../shared/Button/ButtonLink";
-import LogoBlack from "../../../assets/images/logo-black.svg";
 import Hero1 from "../../../assets/images/hero-1.png";
 import Hero2 from "../../../assets/images/hero-2.png";
 import styles from "./LandingPage.module.css";

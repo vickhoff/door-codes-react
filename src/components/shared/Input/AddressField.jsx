@@ -13,7 +13,6 @@ export function AddressField({label, error, id, required, disabled, defaultValue
     const debounceTimer = useRef(null)
 
     useEffect(() => {
-        console.log("defaultValue changed:", defaultValue)
         if (defaultValue) setInputValue(defaultValue)
     }, [defaultValue])
 
