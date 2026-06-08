@@ -35,10 +35,6 @@ function App() {
               <Route path="settings" element={<UserSettingsPage />} />
             </Route>
           </Route>
-
-          {/* REVIEW: No catch-all / 404 route. Navigating to any undefined path
-              (e.g. /foo) renders a blank page. Add a `<Route path="*" element={<NotFound />} />`
-              to give users feedback on invalid URLs. */}
         </Routes>
       </AuthProvider>
     </BrowserRouter>
